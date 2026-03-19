@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHADOW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,700&family=Barlow+Condensed:wght@400;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    @font-face {
+      font-family: 'Delight';
+      src: url("fonts/Delight/Delight-Regular.ttf");
+    }
+    @font-face {
+      font-family: 'Raleway';
+      src: url("fonts/Raleway/Raleway-Regular.ttf");
+    }
+
+    :root {
+      --black:  #453F3D;
+      --white:  #E0DFDD;
+      --red:    #BF8440;
+      --blue:   #7489A3;
+      --manila: #E0D3AF;
+      --brown:  #7F7265;
+
+      --g1:     #1c1c1c;
+      --g2:     #3a3a3a;
+      --g3:     #8a8a8a;
+      --g4:     #c8c6c0;
+      --g5:     #e8e6e0;
+
+      --sp-xs:  clamp(8px,  1.5vw, 14px);
+      --sp-sm:  clamp(14px, 2vw,   20px);
+      --sp-md:  clamp(20px, 3vw,   32px);
+      --sp-lg:  clamp(32px, 5vw,   56px);
+      --sp-xl:  clamp(48px, 7vw,   88px);
+
+      --px:  clamp(16px, 5vw, 60px);
+      --gap: clamp(10px, 1.5vw, 20px);
+
+      --f-display: 'Raleway', sans-serif;
+      --f-body:    'Delight', sans-serif;
+      --f-mono:    'Raleway', monospace;
+      --f-main:    'Times New Roman', serif;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--f-body);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── UTILITY ────────────────────────────────────────────── */
+    .label {
+      font-family: var(--f-mono);
+      font-size: clamp(9px, 1.5vw, 11px);
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--g3);
+    }
+    .label--red { color: var(--red); }
+    .rule { width: 100%; height: 1px; background: var(--black); }
+    .rule--red { background: var(--red); height: 2px; }
+    .rule--light { background: var(--g5); }
+
+    /* ─── BUTTONS ────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--f-mono);
+      font-size: clamp(10px, 1.5vw, 12px);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: clamp(10px, 2vw, 12px) clamp(16px, 3vw, 22px);
+      border: 1.5px solid var(--black);
+      background: transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .btn:hover              { background: var(--black); color: var(--white); }
+    .btn--fill              { background: var(--black); color: var(--white); }
+    .btn--fill:hover        { background: var(--red); border-color: var(--red); }
+    .btn--red               { background: var(--red); color: var(--white); border-color: var(--red); }
+    .btn--red:hover         { background: var(--black); border-color: var(--black); }
+    .btn--white             { background: var(--white); color: var(--red); border-color: var(--white); }
+    .btn--white:hover       { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* ─── NAV — frosted glass ────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(224, 223, 221, 0.55);
+      backdrop-filter: blur(16px) saturate(1.6);
+      -webkit-backdrop-filter: blur(16px) saturate(1.6);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 1px 0 rgba(69,63,61,.08), 0 4px 24px rgba(69,63,61,.08);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: clamp(48px, 8vw, 58px);
+      padding: 0 var(--px);
+      max-width: 1400px;
+      margin: 0 auto;
+      gap: var(--sp-md);
+    }
+    .nav-logo {
+      font-family: var(--f-main);
+      font-size: clamp(16px, 3vw, 22px);
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: clamp(20px, 3vw, 36px); list-style: none; }
+    .nav-links a {
+      font-family: var(--f-mono);
+      font-size: clamp(10px, 1.3vw, 12px);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--g2);
+      transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      background: none; border: none; cursor: pointer;
+      padding: 4px; flex-shrink: 0;
+    }
+    .nav-hamburger span {
+      display: block; width: 100%; height: 1.5px;
+      background: var(--black);
+      transition: transform .25s, opacity .25s;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: clamp(48px, 8vw, 58px);
+      left: 0; right: 0;
+      background: rgba(224, 223, 221, 0.72);
+      backdrop-filter: blur(16px) saturate(1.6);
+      -webkit-backdrop-filter: blur(16px) saturate(1.6);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+      padding: var(--sp-md) var(--px);
+      z-index: 199;
+      flex-direction: column;
+      gap: var(--sp-sm);
+    }
+    .nav-drawer.open { display: flex; }
+    .nav-drawer a {
+      font-family: var(--f-mono); font-size: 13px;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--g2); padding: var(--sp-xs) 0;
+      border-bottom: 1px solid var(--g5);
+    }
+    .nav-drawer a:last-child { border-bottom: none; }
+
+    /* ─── SECTION HEADER ─────────────────────────────────────── */
+    section { border-bottom: 1px solid var(--black); }
+    .section-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--gap) var(--sp-md);
+      align-items: center;
+      padding: var(--sp-md) var(--px);
+      border-bottom: 1px solid var(--g5);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .section-header .label { white-space: nowrap; }
+    .section-header h2 {
+      font-family: var(--f-display);
+      font-size: clamp(24px, 4vw, 44px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: .01em;
+    }
+    .section-header p {
+      font-size: clamp(12px, 1.5vw, 14px);
+      color: var(--g2);
+      line-height: 1.65;
+      text-align: right;
+      max-width: 320px;
+    }
+
+    /* ─── HERO ────────────────────────────────────────────────── */
+    #hero { border-bottom: 1px solid var(--black); }
+    .hero-eyebrow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--sp-xs);
+      padding: var(--sp-sm) var(--px);
+      border-bottom: 1px solid var(--black);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .hero-body {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--gap);
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--sp-lg) var(--px);
+      align-items: end;
+    }
+    .hero-text { display: flex; flex-direction: column; gap: var(--sp-md); }
+    .hero-eyebrow-row { display: flex; align-items: center; gap: var(--sp-sm); }
+    .hero-eyebrow-row .rule--red { flex: 0 0 32px; }
+    h1 {
+      font-family: var(--f-display);
+      font-size: clamp(56px, 10vw, 128px);
+      font-weight: 900;
+      line-height: .92;
+      letter-spacing: -.01em;
+      text-transform: uppercase;
+    }
+    h1 em { font-family: var(--f-main); font-weight: 300; color: var(--red); }
+    .hero-sub {
+      font-size: clamp(13px, 2vw, 16px);
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--g2);
+      max-width: 480px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--sp-md);
+      border-left: 1px solid var(--black);
+      padding-left: clamp(16px, 2vw, 28px);
+      min-width: 110px;
+    }
+    .hero-stat-num {
+      font-family: var(--f-display);
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 900;
+      line-height: 1;
+    }
+    .hero-stat-num span { color: var(--red); }
+    .hero-stat p {
+      font-size: clamp(9px, 1.2vw, 11px);
+      color: var(--g3);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      line-height: 1.4;
+    }
+    .hero-divider { height: 1px; background: var(--g4); }
+
+    /* ─── TICKER ─────────────────────────────────────────────── */
+    #ticker {
+      background: var(--black);
+      color: var(--white);
+      padding: clamp(10px, 2vw, 14px) 0;
+      overflow: hidden;
+      border-bottom: 1px solid var(--black);
+    }
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 36px;
+      font-family: var(--f-mono);
+      font-size: clamp(10px, 1.5vw, 12px);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── CAPABILITIES ────────────────────────────────────────── */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--px);
+    }
+    .cap-card {
+      padding: clamp(28px, 4vw, 48px) clamp(16px, 2.5vw, 28px);
+      border-right: 1px solid var(--black);
+      border-bottom: 1px solid var(--g5);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(12px, 2vw, 20px);
+      transition: background .2s, color .2s;
+      cursor: default;
+    }
+    .cap-card:last-child { border-right: none; border-bottom: none; }
+    .cap-card:hover { background: var(--black); color: var(--white); }
+    .cap-card:hover .label { color: var(--red); }
+    .cap-card:hover .cap-num { color: rgba(255,255,255,.06); }
+    .cap-card:hover .rule--light { background: rgba(255,255,255,.1); }
+    .cap-card:hover p { color: var(--g4); }
+    .cap-num {
+      font-family: var(--f-display);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--blue);
+      transition: color .2s;
+    }
+    .cap-card h3 {
+      font-family: var(--f-display);
+      font-size: clamp(16px, 2.5vw, 22px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      line-height: 1.1;
+    }
+    .cap-card p { font-size: clamp(12px, 1.5vw, 13px); line-height: 1.65; color: var(--g3); }
+    .cap-arrow { margin-top: auto; font-family: var(--f-mono); font-size: clamp(16px, 2.5vw, 22px); }
+
+    /* ─── MANIFESTO ──────────────────────────────────────────── */
+    #manifesto { background: var(--black); color: var(--white); }
+    .manifesto-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--sp-md) var(--sp-lg);
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--sp-xl) var(--px);
+      align-items: start;
+    }
+    #manifesto .label { color: var(--red); padding-top: 10px; white-space: nowrap; }
+    #manifesto blockquote {
+      font-family: var(--f-display);
+      font-size: clamp(28px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+    }
+    #manifesto blockquote em { font-style: italic; font-weight: 300; color: var(--g3); }
+    .manifesto-sub {
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-md);
+      border-top: 1px solid var(--g1);
+      padding-top: var(--sp-md);
+    }
+    .manifesto-sub p { font-size: clamp(12px, 1.5vw, 14px); line-height: 1.7; color: var(--g3); max-width: 480px; }
+
+    /* ─── PROCESS ─────────────────────────────────────────────── */
+    .proc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--px);
+      border-top: 1px solid var(--g5);
+    }
+    .proc-step {
+      padding: clamp(28px, 4vw, 48px) clamp(16px, 2.5vw, 28px) clamp(28px, 4vw, 48px) 0;
+      border-right: 1px solid var(--g5);
+      border-bottom: 1px solid var(--g5);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 1.5vw, 16px);
+    }
+    .proc-step:last-child { border-right: none; border-bottom: none; }
+    .proc-num-row { display: flex; align-items: center; gap: 10px; }
+    .proc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+    .proc-step-num { font-family: var(--f-mono); font-size: clamp(9px, 1.2vw, 11px); color: var(--g3); letter-spacing: .1em; }
+    .proc-step h3 {
+      font-family: var(--f-display);
+      font-size: clamp(15px, 2.2vw, 20px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      line-height: 1.1;
+    }
+    .proc-step p { font-size: clamp(12px, 1.5vw, 13px); line-height: 1.65; color: var(--g2); }
+
+    /* ─── METRICS ─────────────────────────────────────────────── */
+    .met-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--px);
+    }
+    .met-cell {
+      padding: clamp(28px, 5vw, 56px) clamp(16px, 2.5vw, 28px);
+      border-right: 1px solid var(--black);
+      border-bottom: 1px solid var(--g5);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .met-cell:last-child { border-right: none; border-bottom: none; }
+    .met-cell::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--red);
+      transition: width .4s ease;
+    }
+    .met-cell:hover::after { width: 100%; }
+    .met-value { font-family: var(--f-display); font-size: clamp(32px, 5vw, 60px); font-weight: 900; line-height: 1; }
+    .met-value sup { font-size: .45em; vertical-align: super; color: var(--red); }
+    .met-label { font-size: clamp(10px, 1.3vw, 12px); color: var(--g3); text-transform: uppercase; letter-spacing: .08em; line-height: 1.4; }
+
+    /* ─── WORK ────────────────────────────────────────────────── */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--px);
+      border-top: 1px solid var(--g5);
+    }
+    .work-card {
+      padding: clamp(24px, 4vw, 48px) clamp(0px, 2vw, 24px);
+      border-bottom: 1px solid var(--black);
+      border-right: 1px solid var(--black);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(12px, 2vw, 18px);
+    }
+    .work-card:last-child { border-bottom: none; border-right: none; }
+    .work-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; }
+    .work-bg { width: 100%; height: 100%; transition: transform .4s ease; }
+    .work-card:hover .work-bg { transform: scale(1.03); }
+    .work-bg-1 { background: linear-gradient(135deg, #0a0a0a 0%, #1c1c1c 60%, #977BA1 100%); }
+    .work-bg-2 { background: linear-gradient(135deg, #1a1a2e 0%, #7F7265 60%, #7F7265 100%); }
+    .work-bg-3 { background: linear-gradient(135deg, #2d2d2d 0%, #3a3a3a 50%, #c8c6c0 100%); }
+    .work-bg-4 { background: linear-gradient(135deg, #0a0a0a 0%, #7489A3 60%, #0a0a0a 100%); }
+    .work-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+    .work-overlay-text {
+      font-family: var(--f-display);
+      font-size: clamp(40px, 7vw, 64px);
+      font-weight: 900;
+      color: rgba(255,255,255,.06);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .work-meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
+    .work-card h3 {
+      font-family: var(--f-display);
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      line-height: 1.1;
+    }
+    .work-card p { font-size: clamp(12px, 1.5vw, 13px); line-height: 1.65; color: var(--g2); }
+    .work-link {
+      font-family: var(--f-mono);
+      font-size: clamp(10px, 1.3vw, 12px);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* ─── ABOUT ───────────────────────────────────────────────── */
+    .about-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      gap: var(--sp-lg);
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--sp-xl) var(--px);
+      align-items: start;
+    }
+    .about-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: var(--black);
+      display: flex;
+      align-items: flex-end;
+      padding: clamp(20px, 4vw, 36px);
+      overflow: hidden;
+      position: relative;
+    }
+    .about-img-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,.04) 39px, rgba(255,255,255,.04) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,.04) 39px, rgba(255,255,255,.04) 40px);
+    }
+    .about-img-accent { position: absolute; top: 0; right: 0; width: 38%; height: 28%; background: var(--red); }
+    .about-img-caption {
+      position: relative; z-index: 1;
+      font-family: var(--f-mono);
+      font-size: clamp(9px, 1.3vw, 11px);
+      color: rgba(255,255,255,.5);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+    .about-img-caption strong {
+      display: block;
+      font-family: var(--f-display);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 6px;
+    }
+    .about-content { display: flex; flex-direction: column; gap: clamp(16px, 3vw, 28px); }
+    .about-content h2 {
+      font-family: var(--f-display);
+      font-size: clamp(26px, 4vw, 48px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: .01em;
+    }
+    .about-content h2 em { font-style: italic; font-weight: 300; color: var(--g3); }
+    .about-content p { font-size: clamp(13px, 1.7vw, 15px); line-height: 1.75; color: var(--g2); }
+    .about-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(12px, 2vw, 20px);
+      border-top: 1px solid var(--g5);
+      padding-top: clamp(16px, 2.5vw, 24px);
+    }
+    .about-fact { display: flex; flex-direction: column; gap: 4px; }
+    .about-fact-num { font-family: var(--f-display); font-size: clamp(24px, 4vw, 34px); font-weight: 900; line-height: 1; }
+    .about-fact-num b { color: var(--red); }
+    .about-fact p { font-size: clamp(9px, 1.2vw, 11px); color: var(--g3); text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ─── CLIENTS ─────────────────────────────────────────────── */
+    .cl-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--px);
+      border-top: 1px solid var(--g5);
+    }
+    .cl-cell {
+      padding: clamp(24px, 4vw, 44px) 0;
+      border-right: 1px solid var(--g5);
+      border-bottom: 1px solid var(--g5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cl-cell:nth-child(3n) { border-right: none; }
+    .cl-cell:nth-last-child(-n+3) { border-bottom: none; }
+    .cl-name {
+      font-family: var(--f-display);
+      font-size: clamp(14px, 2vw, 22px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--g4);
+      transition: color .2s;
+    }
+    .cl-cell:hover .cl-name { color: var(--black); }
+
+    /* ─── CTA ─────────────────────────────────────────────────── */
+    #cta { background: var(--red); color: var(--white); border-bottom: none; }
+    .cta-inner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+      gap: var(--sp-lg);
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--sp-xl) var(--px);
+    }
+    #cta h2 {
+      font-family: var(--f-display);
+      font-size: clamp(36px, 6vw, 76px);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: .95;
+      letter-spacing: .01em;
+    }
+    .cta-aside {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(16px, 2.5vw, 24px);
+      border-left: 1px solid rgba(255,255,255,.3);
+      padding-left: clamp(20px, 3vw, 40px);
+    }
+    .cta-aside p { font-size: clamp(13px, 1.7vw, 15px); line-height: 1.65; opacity: .85; }
+
+    /* ─── FOOTER ──────────────────────────────────────────────── */
+    footer { background: var(--black); color: var(--white); }
+    .foot-main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+      gap: var(--sp-lg);
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--sp-xl) var(--px) var(--sp-lg);
+    }
+    .foot-brand { display: flex; flex-direction: column; gap: clamp(10px, 2vw, 16px); }
+    .foot-logo { font-family: var(--f-display); font-size: clamp(18px, 3vw, 26px); font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .foot-logo span { color: var(--red); }
+    .foot-brand p { font-size: clamp(12px, 1.5vw, 14px); line-height: 1.65; color: var(--g3); }
+    .foot-col { display: flex; flex-direction: column; gap: clamp(10px, 1.5vw, 16px); }
+    .foot-col-title { font-family: var(--f-mono); font-size: clamp(9px, 1.2vw, 10px); letter-spacing: .14em; text-transform: uppercase; color: var(--g3); padding-bottom: 6px; border-bottom: 1px solid var(--g1); }
+    .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: clamp(8px, 1.2vw, 12px); }
+    .foot-col a { font-size: clamp(12px, 1.5vw, 14px); color: var(--g4); transition: color .15s; }
+    .foot-col a:hover { color: var(--white); }
+    .foot-bottom {
+      display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+      gap: var(--sp-sm); max-width: 1400px; margin: 0 auto;
+      padding: var(--sp-md) var(--px); border-top: 1px solid var(--g1);
+    }
+    .foot-bottom p { font-family: var(--f-mono); font-size: clamp(9px, 1.3vw, 10px); color: var(--g3); letter-spacing: .08em; text-transform: uppercase; }
+    .foot-badge { font-family: var(--f-mono); font-size: clamp(9px, 1.3vw, 10px); color: var(--g3); letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--g1); padding: clamp(4px, 1vw, 6px) clamp(10px, 1.5vw, 14px); white-space: nowrap; }
+
+    /* ─── SCROLL ANIMATIONS ───────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate { opacity: 0; }
+    .animate.in-view { animation: fadeUp .55s ease forwards; }
+    .d1 { animation-delay: .1s; }
+    .d2 { animation-delay: .2s; }
+    .d3 { animation-delay: .3s; }
+
+    /* ─── BREAKPOINTS ─────────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero-body { grid-template-columns: 1fr; }
+      .hero-stats { display: none; }
+      .section-header { grid-template-columns: 1fr; gap: var(--sp-xs); }
+      .section-header p { text-align: left; max-width: 100%; }
+      .manifesto-inner { grid-template-columns: 1fr; }
+      .manifesto-inner .label { padding-top: 0; }
+      .manifesto-sub { grid-column: 1; }
+      .cta-aside { border-left: none; padding-left: 0; border-top: 1px solid rgba(255,255,255,.3); padding-top: var(--sp-md); }
+      .cl-grid { grid-template-columns: repeat(2, 1fr); }
+      .cl-cell:nth-child(3n)        { border-right: 1px solid var(--g5); }
+      .cl-cell:nth-child(2n)        { border-right: none; }
+      .cl-cell:nth-last-child(-n+3) { border-bottom: 1px solid var(--g5); }
+      .cl-cell:nth-last-child(-n+2) { border-bottom: none; }
+    }
+    @media (min-width: 641px) and (max-width: 1024px) { .cl-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1025px) {
+      .cl-grid { grid-template-columns: repeat(6, 1fr); }
+      .cl-cell:nth-child(3n)        { border-right: 1px solid var(--g5); }
+      .cl-cell:nth-child(6n)        { border-right: none; }
+      .cl-cell:nth-last-child(-n+3) { border-bottom: 1px solid var(--g5); }
+      .cl-cell:nth-last-child(-n+6) { border-bottom: none; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ──────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Shadow</div>
+    <ul class="nav-links">
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#clients">Clients</a></li>
+      <li><a href="#cta">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="drawer" role="navigation">
+  <a href="#capabilities">Capabilities</a>
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#clients">Clients</a>
+  <a href="#cta">Contact</a>
+</div>
+
+<!-- ─── HERO ──────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-eyebrow">
+    <span class="label">Est. 2024 — San Francisco</span>
+    <span class="label label--red">01 / Systems</span>
+  </div>
+  <div class="hero-body">
+    <div class="hero-text animate">
+      <div class="hero-eyebrow-row">
+        <div class="rule--red"></div>
+        <span class="label label--red">Corporate Strategy &amp; Operations</span>
+      </div>
+      <h1>Your<br /><em>unique</em><br />process<br />at<br />scale.<br /></h1>
+      <p class="hero-sub">Shadow designs, integrates, and manages AI systems so communications teams never have to.
+ We absorb the complexity around tooling, maintenance, context-keeping, and scale—so teams can stay focused on narrative, judgment, and relationships.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn--red">View Our Work</a>
+        <a href="#about" class="btn">Our Method →</a>
+      </div>
+    </div>
+    <div class="hero-stats animate d3">
+      <div class="hero-stat">
+        <div class="hero-stat-num">--<span>+</span></div>
+        <p>metric</p>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">--</div>
+        <p>metric</p>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">--<span>%</span></div>
+        <p>metric</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TICKER ────────────────────────────────────────────────── -->
+<div id="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+  </div>
+</div>
+
+<!-- ─── CAPABILITIES ──────────────────────────────────────────── -->
+<section id="capabilities">
+  <div class="section-header animate">
+    <span class="label label--red">02 / Section</span>
+    <h2>Section Title</h2>
+    <p>Short placeholder description for this section goes here.</p>
+  </div>
+  <div class="cap-grid">
+    <div class="cap-card animate">
+      <div class="cap-num">01</div>
+      <div class="rule rule--light"></div>
+      <div class="label label--red">Category</div>
+      <h3>Item<br />Title</h3>
+      <p>Placeholder description text for this item goes here.</p>
+      <div class="cap-arrow">→</div>
+    </div>
+    <div class="cap-card animate d1">
+      <div class="cap-num">02</div>
+      <div class="rule rule--light"></div>
+      <div class="label label--red">Category</div>
+      <h3>Item<br />Title</h3>
+      <p>Placeholder description text for this item goes here.</p>
+      <div class="cap-arrow">→</div>
+    </div>
+    <div class="cap-card animate d2">
+      <div class="cap-num">03</div>
+      <div class="rule rule--light"></div>
+      <div class="label label--red">Category</div>
+      <h3>Item<br />Title</h3>
+      <p>Placeholder description text for this item goes here.</p>
+      <div class="cap-arrow">→</div>
+    </div>
+    <div class="cap-card animate">
+      <div class="cap-num">04</div>
+      <div class="rule rule--light"></div>
+      <div class="label label--red">Category</div>
+      <h3>Item<br />Title</h3>
+      <p>Placeholder description text for this item goes here.</p>
+      <div class="cap-arrow">→</div>
+    </div>
+    <div class="cap-card animate d1">
+      <div class="cap-num">05</div>
+      <div class="rule rule--light"></div>
+      <div class="label label--red">Category</div>
+      <h3>Item<br />Title</h3>
+      <p>Placeholder description text for this item goes here.</p>
+      <div class="cap-arrow">→</div>
+    </div>
+    <div class="cap-card animate d2">
+      <div class="cap-num">06</div>
+      <div class="rule rule--light"></div>
+      <div class="label label--red">Category</div>
+      <h3>Item<br />Title</h3>
+      <p>Placeholder description text for this item goes here.</p>
+      <div class="cap-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MANIFESTO ─────────────────────────────────────────────── -->
+<section id="manifesto">
+  <div class="manifesto-inner">
+    <span class="label">03 / Section</span>
+    <blockquote class="animate">
+      Placeholder<br />headline<br />text—<br /><em>goes<br />here.</em>
+    </blockquote>
+    <div class="manifesto-sub animate d2">
+      <p>Placeholder supporting text for this section. Replace with your own copy when ready.</p>
+      <p>A second line of placeholder supporting text to fill out the layout as needed.</p>
+      <a href="#about" class="btn btn--fill">Read More →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ────────────────────────────────────────────────── -->
+<section id="process">
+  <div class="section-header animate">
+    <span class="label label--red">04 / Section</span>
+    <h2>Section Title</h2>
+    <p>Short placeholder description for this section goes here.</p>
+  </div>
+  <div class="proc-grid">
+    <div class="proc-step animate">
+      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 01</span></div>
+      <h3>Step<br />Title</h3>
+      <p>Placeholder description for this step goes here.</p>
+    </div>
+    <div class="proc-step animate d1">
+      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 02</span></div>
+      <h3>Step<br />Title</h3>
+      <p>Placeholder description for this step goes here.</p>
+    </div>
+    <div class="proc-step animate d2">
+      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 03</span></div>
+      <h3>Step<br />Title</h3>
+      <p>Placeholder description for this step goes here.</p>
+    </div>
+    <div class="proc-step animate">
+      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 04</span></div>
+      <h3>Step<br />Title</h3>
+      <p>Placeholder description for this step goes here.</p>
+    </div>
+    <div class="proc-step animate d1">
+      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 05</span></div>
+      <h3>Step<br />Title</h3>
+      <p>Placeholder description for this step goes here.</p>
+    </div>
+    <div class="proc-step animate d2">
+      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 06</span></div>
+      <h3>Step<br />Title</h3>
+      <p>Placeholder description for this step goes here.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── METRICS ────────────────────────────────────────────────── -->
+<section id="metrics">
+  <div class="met-grid">
+    <div class="met-cell animate"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
+    <div class="met-cell animate d1"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
+    <div class="met-cell animate d2"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
+    <div class="met-cell animate"><div class="met-value">—</div><div class="met-label">Metric Label</div></div>
+    <div class="met-cell animate d1"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
+    <div class="met-cell animate d2"><div class="met-value">—</div><div class="met-label">Metric Label</div></div>
+  </div>
+</section>
+
+<!-- ─── WORK ───────────────────────────────────────────────────── -->
+<section id="work">
+  <div class="section-header animate">
+    <span class="label label--red">05 / Section</span>
+    <h2>Section Title</h2>
+    <p>Short placeholder description for this section goes here.</p>
+  </div>
+  <div class="work-grid">
+    <div class="work-card animate">
+      <div class="work-thumb">
+        <div class="work-bg work-bg-1"><div class="work-overlay"><span class="work-overlay-text">—</span></div></div>
+      </div>
+      <div class="work-meta"><span class="label">Category</span><span class="label">0000</span></div>
+      <h3>Card Title</h3>
+      <p>Placeholder description for this card item goes here.</p>
+      <a href="#" class="work-link">Read More ↗</a>
+    </div>
+    <div class="work-card animate d2">
+      <div class="work-thumb">
+        <div class="work-bg work-bg-2"><div class="work-overlay"><span class="work-overlay-text">—</span></div></div>
+      </div>
+      <div class="work-meta"><span class="label">Category</span><span class="label">0000</span></div>
+      <h3>Card Title</h3>
+      <p>Placeholder description for this card item goes here.</p>
+      <a href="#" class="work-link">Read More ↗</a>
+    </div>
+    <div class="work-card animate">
+      <div class="work-thumb">
+        <div class="work-bg work-bg-3"><div class="work-overlay"><span class="work-overlay-text">—</span></div></div>
+      </div>
+      <div class="work-meta"><span class="label">Category</span><span class="label">0000</span></div>
+      <h3>Card Title</h3>
+      <p>Placeholder description for this card item goes here.</p>
+      <a href="#" class="work-link">Read More ↗</a>
+    </div>
+    <div class="work-card animate d2">
+      <div class="work-thumb">
+        <div class="work-bg work-bg-4"><div class="work-overlay"><span class="work-overlay-text">—</span></div></div>
+      </div>
+      <div class="work-meta"><span class="label">Category</span><span class="label">0000</span></div>
+      <h3>Card Title</h3>
+      <p>Placeholder description for this card item goes here.</p>
+      <a href="#" class="work-link">Read More ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ──────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="about-body">
+    <div class="animate">
+      <div class="about-img">
+        <div class="about-img-pattern"></div>
+        <div class="about-img-accent"></div>
+        <div class="about-img-caption">
+          <strong>Shadow</strong>
+          California — San Francisco<br />Est. 2024
+        </div>
+      </div>
+    </div>
+    <div class="about-content animate d2">
+      <span class="label label--red">06 / Section</span>
+      <h2>Section<br />Heading <em>Here.</em></h2>
+      <p>Placeholder paragraph text for this section.</p>
+      <p>A second placeholder paragraph to fill out the layout. Add as much or as little as needed here.</p>
+      <p>A third placeholder paragraph. This section supports up to three paragraphs before the facts grid.</p>
+      <div class="about-facts">
+        <div class="about-fact"><div class="about-fact-num">—<b></b></div><p>Fact label</p></div>
+        <div class="about-fact"><div class="about-fact-num">—<b></b></div><p>Fact label</p></div>
+        <div class="about-fact"><div class="about-fact-num">—</div><p>Fact label</p></div>
+        <div class="about-fact"><div class="about-fact-num">—</div><p>Fact label</p></div>
+      </div>
+      <div><a href="#cta" class="btn btn--fill">Learn More →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CLIENTS ────────────────────────────────────────────────── -->
+<section id="clients">
+  <div class="section-header animate">
+    <span class="label label--red">07 / Section</span>
+    <h2>Section Title</h2>
+    <p>Short placeholder description for this section goes here.</p>
+  </div>
+  <div class="cl-grid animate">
+    <div class="cl-cell"><span class="cl-name">Name</span></div>
+    <div class="cl-cell"><span class="cl-name">Name</span></div>
+    <div class="cl-cell"><span class="cl-name">Name</span></div>
+    <div class="cl-cell"><span class="cl-name">Name</span></div>
+    <div class="cl-cell"><span class="cl-name">Name</span></div>
+    <div class="cl-cell"><span class="cl-name">Name</span></div>
+  </div>
+</section>
+
+<!-- ─── CTA ────────────────────────────────────────────────────── -->
+<section id="cta">
+  <div class="cta-inner">
+    <h2 class="animate">Placeholder Heading Here</h2>
+    <div class="cta-aside animate d2">
+      <p>Placeholder supporting text for the call to action.</p>
+      <a href="mailto:hello@shadow.com" class="btn btn--white">Get in Touch →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="foot-main">
+    <div class="foot-brand">
+      <div class="foot-logo">Shadow</div>
+      <p>Placeholder tagline text for the footer brand column goes here.</p>
+      <div class="rule" style="background:var(--g1)"></div>
+      <span class="label" style="color:var(--g3)">Location · Location · Location</span>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">Column</div>
+      <ul>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">Column</div>
+      <ul>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">Column</div>
+      <ul>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">Column</div>
+      <ul>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>©Shadow All rights reserved.</p>
+    <div class="foot-badge">Badge Text</div>
+  </div>
+</footer>
+
+<script>
+  const btn = document.getElementById('hamburger');
+  const drawer = document.getElementById('drawer');
+  btn.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
