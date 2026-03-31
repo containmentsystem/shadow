@@ -78,6 +78,8 @@
     .btn--red               { background: var(--red); color: var(--white); border-color: var(--red); }
     .btn--red:hover         { background: var(--black); border-color: var(--black); }
     .btn--white             { background: var(--white); color: var(--red); border-color: var(--white); }
+    .btn--ghost             { border-color: rgba(224,223,221,0.28); color: var(--white); }
+    .btn--ghost:hover       { background: rgba(224,223,221,0.08); border-color: rgba(224,223,221,0.55); }
     .btn--white:hover       { background: var(--black); color: var(--white); border-color: var(--black); }
 
     /* ─── NAV ─────────────────────────────────────────── */
@@ -142,20 +144,34 @@
     .section-header p { font-size: clamp(12px, 1.5vw, 14px); color: var(--g2); line-height: 1.65; text-align: right; max-width: 320px; }
 
     /* ─── HERO ─────────────────────────────────────────── */
-    #hero { border-bottom: 1px solid var(--black); }
+    #hero { background: var(--white); color: var(--black); }
     .hero-eyebrow { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--sp-xs); padding: var(--sp-sm) var(--px); border-bottom: 1px solid var(--black); max-width: 1400px; margin: 0 auto; }
-    .hero-body {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: var(--sp-lg) var(--px);
-    }
-    .hero-text { display: flex; flex-direction: column; gap: var(--sp-md); }
-    .hero-eyebrow-row { display: flex; align-items: center; gap: var(--sp-sm); }
-    .hero-eyebrow-row .rule--red { flex: 0 0 32px; }
-    h1 { font-family: var(--f-display); font-size: clamp(56px, 10vw, 128px); font-weight: 900; line-height: .92; letter-spacing: -.01em; text-transform: uppercase; }
-    h1 em { font-family: var(--f-play); font-weight: 300; color: var(--red); }
-    .hero-sub { font-size: clamp(13px, 2vw, 16px); font-weight: 300; line-height: 1.65; color: var(--g2); max-width: 480px; }
+    .hero-eyebrow .label { color: var(--g3); }
+    .hero-eyebrow .label--red { color: var(--red); }
+    .hero-headline-zone { padding: var(--sp-lg) var(--px) 0; max-width: 1400px; margin: 0 auto; }
+    .hero-kicker { display: flex; align-items: center; gap: var(--sp-sm); margin-bottom: clamp(16px, 2.5vw, 28px); }
+    .hero-kicker .rule--red { flex: 0 0 32px; }
+    h1 { font-family: var(--f-display); font-size: clamp(60px, 9.5vw, 140px); font-weight: 900; line-height: .86; letter-spacing: -.03em; text-transform: uppercase; color: var(--black); }
+    h1 em { font-family: var(--f-play); font-weight: 300; font-style: italic; color: var(--red); text-transform: none; letter-spacing: -.01em; }
+    .hero-hl-group { display: inline-block; }
+    .hero-accent { height: 3px; background: var(--red); margin-top: var(--sp-md); width: 100%; }
+    .hero-body { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 3fr 2fr; gap: clamp(32px, 5vw, 72px); padding: var(--sp-lg) var(--px); align-items: end; }
+    .hero-right { display: flex; flex-direction: column; gap: var(--sp-md); padding-right: clamp(24px, 8.7vw, 125px); }
+    .hero-right-label { border-left: 2px solid var(--red); padding-left: var(--sp-sm); display: flex; flex-direction: column; gap: 6px; }
+    .hero-sub { font-size: clamp(13px, 1.8vw, 16px); font-weight: 300; line-height: 1.7; color: var(--g2); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }
+
+    /* ─── HERO MEDIA ─────────────────────────────────── */
+    .hero-media-frame { width: 100%; aspect-ratio: 16 / 9; background: var(--g5); border: 1.5px dashed var(--g4); border-radius: var(--r-lg); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .hero-media-inner { display: flex; flex-direction: column; align-items: center; gap: var(--sp-xs); opacity: 0.38; pointer-events: none; color: var(--black); }
+    .hero-media-icon { width: clamp(32px, 4vw, 48px); height: clamp(32px, 4vw, 48px); }
+    .hero-media-tag { font-family: var(--f-mono); font-size: clamp(9px, 1.5vw, 11px); letter-spacing: .14em; text-transform: uppercase; color: var(--black); }
+
+    @media (max-width: 768px) {
+      .hero-body { grid-template-columns: 1fr; }
+      .hero-right { order: -1; padding-right: 0; }
+
+    }
 
     /* ─── TICKER ──────────────────────────────────────── */
     #ticker { background: var(--black); color: var(--white); padding: clamp(10px, 2vw, 14px) 0; overflow: hidden; border-bottom: 1px solid var(--black); }
@@ -321,13 +337,33 @@
     <span class="label">Est. 2024 — San Francisco</span>
     <span class="label label--red">01 / Systems</span>
   </div>
+  <div class="hero-headline-zone animate">
+    <div class="hero-kicker">
+      <div class="rule--red"></div>
+      <span class="label label--red">Corporate Strategy &amp; Operations</span>
+    </div>
+    <div class="hero-hl-group">
+      <h1><em>The Agency</em><br />Infrastructure<br />Platform</h1>
+      <div class="hero-accent"></div>
+    </div>
+  </div>
   <div class="hero-body">
-    <div class="hero-text animate">
-      <div class="hero-eyebrow-row">
-        <div class="rule--red"></div>
-        <span class="label label--red">Corporate Strategy &amp; Operations</span>
+    <div class="hero-left animate">
+      <div class="hero-media-frame">
+        <div class="hero-media-inner">
+          <svg class="hero-media-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M19 15.5l16 8.5-16 8.5V15.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          <span class="hero-media-tag">16 : 9 &nbsp;·&nbsp; Video / Animation</span>
+        </div>
       </div>
-      <h1>The<br />Agency<br />Infrastructure<br />Platform</h1>
+    </div>
+    <div class="hero-right animate">
+      <div class="hero-right-label">
+        <span class="label label--red">Agency Infrastructure</span>
+        <span class="label" style="color:var(--g3)">Platform Overview</span>
+      </div>
       <p class="hero-sub">Scale your agency without scaling your headcount. Shadow is embedded communications infrastructure that runs your methodology across every client, persistently and proactively.</p>
       <div class="hero-actions">
         <a href="#work" class="btn btn--red">Get started</a>
