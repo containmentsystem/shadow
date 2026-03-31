@@ -159,9 +159,11 @@
 
     /* ─── TICKER ──────────────────────────────────────── */
     #ticker { background: var(--black); color: var(--white); padding: clamp(10px, 2vw, 14px) 0; overflow: hidden; border-bottom: 1px solid var(--black); }
-    .ticker-track { display: flex; white-space: nowrap; animation: ticker 28s linear infinite; }
-    .ticker-item { display: inline-flex; align-items: center; gap: 20px; padding: 0 36px; font-family: var(--f-mono); font-size: clamp(10px, 1.5vw, 12px); letter-spacing: .1em; text-transform: uppercase; }
+    .ticker-track { display: flex; align-items: center; white-space: nowrap; width: max-content; animation: ticker 36s linear infinite; will-change: transform; }
+    .ticker-item { display: inline-flex; align-items: center; gap: 48px; padding: 0 24px; }
     .ticker-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+    .ticker-logo-box { display: flex; align-items: center; justify-content: center; height: clamp(18px, 2.5vw, 30px); min-width: 60px; }
+    .ticker-logo { height: 100%; width: auto; max-width: 140px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.75; transition: opacity .2s; display: block; }
     @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* ─── CAPABILITIES ────────────────────────────────── */
@@ -337,18 +339,27 @@
 
 <div id="ticker" aria-hidden="true">
   <div class="ticker-track">
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
-    <span class="ticker-item"><span class="ticker-dot"></span>Placeholder Item</span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Amazon/Amazon_Logo_0.svg" alt="Amazon"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Etsy/Etsy_Logo_0.svg" alt="Etsy"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Harness/Harness_idSIRnHk5f_0.svg" alt="Harness"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/HubSpot/HubSpot_idPJcOROpd_0.svg" alt="HubSpot"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Lovable/Lovable_idzY4ZcDux_0.svg" alt="Lovable"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Netflix/Netflix_Logo_0.svg" alt="Netflix"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/OpenAI/OpenAI_Logo_0.svg" alt="OpenAI"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Roblox/Roblox_Logo_0.svg" alt="Roblox"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/SoftBank/SoftBank_idOq9rBzaA_0.svg" alt="SoftBank"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/TikTok/TikTok_Logo_0.svg" alt="TikTok"></span><span class="ticker-dot"></span></span>
+    <!-- Duplicate set for seamless loop -->
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Amazon/Amazon_Logo_0.svg" alt="Amazon"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Etsy/Etsy_Logo_0.svg" alt="Etsy"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Harness/Harness_idSIRnHk5f_0.svg" alt="Harness"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/HubSpot/HubSpot_idPJcOROpd_0.svg" alt="HubSpot"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Lovable/Lovable_idzY4ZcDux_0.svg" alt="Lovable"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Netflix/Netflix_Logo_0.svg" alt="Netflix"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/OpenAI/OpenAI_Logo_0.svg" alt="OpenAI"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/Roblox/Roblox_Logo_0.svg" alt="Roblox"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/SoftBank/SoftBank_idOq9rBzaA_0.svg" alt="SoftBank"></span><span class="ticker-dot"></span></span>
+    <span class="ticker-item"><span class="ticker-logo-box"><img class="ticker-logo" src="logos/TikTok/TikTok_Logo_0.svg" alt="TikTok"></span><span class="ticker-dot"></span></span>
   </div>
 </div>
 
