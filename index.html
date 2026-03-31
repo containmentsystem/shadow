@@ -87,8 +87,12 @@
       position: sticky;
       top: clamp(8px, 1.5vw, 14px);
       z-index: 200;
-      padding: 0 var(--px);
       pointer-events: none;
+    }
+    .nav-wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--px);
     }
     .nav-inner {
       display: flex;
@@ -96,8 +100,6 @@
       justify-content: space-between;
       height: clamp(44px, 7vw, 54px);
       padding: 0 clamp(16px, 3vw, 32px);
-      max-width: 1400px;
-      margin: 0 auto;
       gap: var(--sp-md);
       background: rgba(224, 223, 221, 0.18);
       backdrop-filter: blur(20px) saturate(1.8);
@@ -145,18 +147,15 @@
 
     /* ─── HERO ─────────────────────────────────────────── */
     #hero { background: var(--white); color: var(--black); }
-    .hero-eyebrow { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--sp-xs); padding: var(--sp-sm) var(--px); border-bottom: 1px solid var(--black); max-width: 1400px; margin: 0 auto; }
-    .hero-eyebrow .label { color: var(--g3); }
-    .hero-eyebrow .label--red { color: var(--red); }
-    .hero-headline-zone { padding: var(--sp-lg) var(--px) 0; max-width: 1400px; margin: 0 auto; }
+.hero-headline-zone { padding: var(--sp-lg) var(--px) 0; max-width: 1400px; margin: 0 auto; }
     .hero-kicker { display: flex; align-items: center; gap: var(--sp-sm); margin-bottom: clamp(16px, 2.5vw, 28px); }
     .hero-kicker .rule--red { flex: 0 0 32px; }
     h1 { font-family: var(--f-display); font-size: clamp(60px, 9.5vw, 140px); font-weight: 900; line-height: .86; letter-spacing: -.03em; text-transform: uppercase; color: var(--black); }
     h1 em { font-family: var(--f-play); font-weight: 300; font-style: italic; color: var(--red); text-transform: none; letter-spacing: -.01em; }
     .hero-hl-group { display: inline-block; }
-    .hero-accent { height: 3px; background: var(--red); margin-top: var(--sp-md); width: 100%; }
-    .hero-body { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 3fr 2fr; gap: clamp(32px, 5vw, 72px); padding: var(--sp-lg) var(--px); align-items: end; }
-    .hero-right { display: flex; flex-direction: column; gap: var(--sp-md); padding-right: clamp(24px, 8.7vw, 125px); }
+    .hero-accent { height: 3px; background: var(--red); margin-top: var(--sp-md); }
+    .hero-body { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 4fr 2fr; gap: var(--gap); padding: var(--sp-lg) var(--px); align-items: end; }
+    .hero-right { display: flex; flex-direction: column; gap: var(--sp-md); }
     .hero-right-label { border-left: 2px solid var(--red); padding-left: var(--sp-sm); display: flex; flex-direction: column; gap: 6px; }
     .hero-sub { font-size: clamp(13px, 1.8vw, 16px); font-weight: 300; line-height: 1.7; color: var(--g2); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: var(--sp-sm); }
@@ -169,7 +168,7 @@
 
     @media (max-width: 768px) {
       .hero-body { grid-template-columns: 1fr; }
-      .hero-right { order: -1; padding-right: 0; }
+      .hero-right { order: -1; }
 
     }
 
@@ -310,6 +309,7 @@
 <body>
 
 <nav>
+  <div class="nav-wrap">
   <div class="nav-inner">
     <div class="nav-logo">Shadow</div>
     <ul class="nav-links">
@@ -323,6 +323,7 @@
       <span></span><span></span><span></span>
     </button>
   </div>
+  </div>
 </nav>
 <div class="nav-drawer" id="drawer" role="navigation">
   <a href="#capabilities">Capabilities</a>
@@ -333,19 +334,14 @@
 </div>
 
 <section id="hero">
-  <div class="hero-eyebrow">
-    <span class="label">Est. 2024 — San Francisco</span>
-    <span class="label label--red">01 / Systems</span>
-  </div>
   <div class="hero-headline-zone animate">
     <div class="hero-kicker">
-      <div class="rule--red"></div>
-      <span class="label label--red">Corporate Strategy &amp; Operations</span>
+      <span class="label label--red">01 / Systems</span>
     </div>
     <div class="hero-hl-group">
       <h1><em>The Agency</em><br />Infrastructure<br />Platform</h1>
-      <div class="hero-accent"></div>
     </div>
+    <div class="hero-accent"></div>
   </div>
   <div class="hero-body">
     <div class="hero-left animate">
