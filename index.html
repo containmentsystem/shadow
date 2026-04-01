@@ -12,6 +12,8 @@
     @font-face { font-family: 'Delight'; src: url("fonts/Delight/Delight-Regular.ttf"); }
     @font-face { font-family: 'Raleway'; src: url("fonts/Raleway/Raleway-Regular.ttf"); }
     @font-face { font-family: 'Exposure70'; src: url("fonts/Exposure/ExposureItalicTrial[-40].otf"); }
+    @font-face { font-family: 'IvyPro'; src: url("fonts/IvyPro/IvyPresto\ Display\ Regular.ttf"); }
+    @font-face { font-family: 'IvyProLight'; src: url("fonts/IvyPro/IvyPresto\ Display\ Light.ttf"); }
 
     :root {
       --black:  #453F3D;
@@ -35,7 +37,8 @@
       --f-display: 'Raleway', sans-serif;
       --f-body:    'Delight', sans-serif;
       --f-mono:    'Raleway', monospace;
-      --f-main:    'Playfair Display', serif;
+      --f-main:    'IvyPro', serif;
+      --f-sub:   'IvyProLight', serif;
       --f-play:   'Exposure70', serif;
 
       --r-sm:  4px;
@@ -142,7 +145,7 @@
     section { border-bottom: 1px solid var(--black); }
     .section-header { display: grid; grid-template-columns: auto 1fr auto; gap: var(--gap) var(--sp-md); align-items: center; padding: var(--sp-md) var(--px); border-bottom: 1px solid var(--g5); max-width: 1400px; margin: 0 auto; }
     .section-header .label { white-space: nowrap; }
-    .section-header h2 { font-family: var(--f-display); font-size: clamp(24px, 4vw, 44px); font-weight: 900; text-transform: uppercase; line-height: 1; letter-spacing: .01em; }
+    .section-header h2 { font-family: var(--f-main); font-size: clamp(24px, 4vw, 44px); font-weight: 900; text-transform: uppercase; line-height: 1; letter-spacing: .01em; }
     .section-header p { font-size: clamp(12px, 1.5vw, 14px); color: var(--g2); line-height: 1.65; text-align: right; max-width: 320px; }
 
     /* ─── HERO ─────────────────────────────────────────── */
@@ -150,8 +153,8 @@
 .hero-headline-zone { padding: var(--sp-lg) var(--px) 0; max-width: 1400px; margin: 0 auto; }
     .hero-kicker { display: flex; align-items: center; gap: var(--sp-sm); margin-bottom: clamp(16px, 2.5vw, 28px); }
     .hero-kicker .rule--red { flex: 0 0 32px; }
-    h1 { font-family: var(--f-display); font-size: clamp(60px, 9.5vw, 140px); font-weight: 900; line-height: .86; letter-spacing: -.03em; text-transform: uppercase; color: var(--black); }
-    h1 em { font-family: var(--f-play); font-weight: 300; font-style: italic; color: var(--red); text-transform: none; letter-spacing: -.01em; }
+    h1 { font-family: var(--f-sub); font-size: clamp(60px, 9.5vw, 140px); font-weight: 900; line-height: .86; letter-spacing: .03em; color: var(--black); }
+    h1 em { font-family: var(--f-play); font-weight: 300; font-style: italic; color: var(--red); text-transform: none; letter-spacing: -.01em; position: relative; z-index: 1; }
     .hero-hl-group { display: inline-block; }
     .hero-accent { height: 3px; background: var(--red); margin-top: var(--sp-md); }
     .hero-body { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 4fr 2fr; gap: var(--gap); padding: var(--sp-lg) var(--px); align-items: end; }
@@ -189,7 +192,7 @@
     .cap-card:hover .cap-num { color: rgba(255,255,255,.06); }
     .cap-card:hover .rule--light { background: rgba(255,255,255,.1); }
     .cap-card:hover p { color: var(--g4); }
-    .cap-num { font-family: var(--f-display); font-size: clamp(40px, 6vw, 72px); font-weight: 900; line-height: 1; color: var(--blue); transition: color .2s; }
+    .cap-num { font-family: var(--f-body); font-size: clamp(40px, 6vw, 72px); font-weight: 900; line-height: 1; color: var(--blue); transition: color .2s; }
     .cap-card h3 { font-family: var(--f-display); font-size: clamp(16px, 2.5vw, 22px); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; line-height: 1.1; }
     .cap-card p { font-size: clamp(12px, 1.5vw, 13px); line-height: 1.65; color: var(--g3); }
     .cap-arrow { margin-top: auto; font-family: var(--f-mono); font-size: clamp(16px, 2.5vw, 22px); }
@@ -336,10 +339,10 @@
 <section id="hero">
   <div class="hero-headline-zone animate">
     <div class="hero-kicker">
-      <span class="label label--red">01 / Systems</span>
+      <span class="label label--red">01 / Hero</span>
     </div>
     <div class="hero-hl-group">
-      <h1><em>The Agency</em><br />Infrastructure<br />Platform</h1>
+      <h1>The <em>Agency</em><br />Infrastructure<br />Platform</h1>
     </div>
     <div class="hero-accent"></div>
   </div>
@@ -357,8 +360,8 @@
     </div>
     <div class="hero-right animate">
       <div class="hero-right-label">
-        <span class="label label--red">Agency Infrastructure</span>
-        <span class="label" style="color:var(--g3)">Platform Overview</span>
+        <span class="label label--red">Platform Overview</span>
+        <span class="label" style="color:var(--g3)">Demonstration</span>
       </div>
       <p class="hero-sub">Scale your agency without scaling your headcount. Shadow is embedded communications infrastructure that runs your methodology across every client, persistently and proactively.</p>
       <div class="hero-actions">
@@ -397,9 +400,9 @@
 
 <section id="capabilities">
   <div class="section-header animate">
-    <span class="label label--red">02 / Section</span>
-    <h2>Section Title</h2>
-    <p>Short placeholder description for this section goes here.</p>
+    <span class="label label--red">02 / Layers</span>
+    <h2>Infrastructure</h2>
+    <p>Shadow covers six operational layers of a communications agency. Each one runs on your methodology, your voice, your quality standard.</p>
   </div>
   <div class="cap-grid">
     <div class="cap-card animate">
