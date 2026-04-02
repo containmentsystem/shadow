@@ -190,7 +190,8 @@
     .cap-card:hover { background: var(--black); color: var(--white); }
     .cap-card:hover .label { color: var(--blue); }
     .cap-card:hover .cap-num { color: var(--red); }
-    .cap-card:hover .rule--light { background: rgba(255,255,255,.1); }
+    .cap-card .rule--light { background: var(--g3); }
+    .cap-card:hover .rule--light { background: var(--white); }
     .cap-card:hover p { color: var(--g4); }
     .cap-num { font-family: var(--f-body); font-size: clamp(40px, 6vw, 72px); font-weight: 900; line-height: 1; color: var(--blue); transition: color .2s; }
     .cap-card h3 { font-family: var(--f-display); font-size: clamp(16px, 2.5vw, 22px); font-weight: 700; text-transform: uppercase; letter-spacing: 0; line-height: 1.1; }
@@ -214,11 +215,12 @@
     #features .section-header h2 { color: var(--white); }
     .feat-body-wrap { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0 var(--gap); max-width: 1400px; margin: 0 auto; padding: 0 var(--px) var(--sp-xl); align-items: center; }
     .feat-hero { grid-column: 1 / 3; padding-right: var(--sp-md); }
-    .feat-headline { font-family: var(--f-display); font-size: clamp(32px, 5vw, 72px); font-weight: 700; line-height: 1; text-transform: uppercase; letter-spacing: .01em; }
-    .feat-headline em { font-style: italic; font-weight: 300; color: var(--g3); }
+    .feat-headline { font-family: var(--f-main); font-size: clamp(32px, 5vw, 72px); font-weight: 700; line-height: 1; text-transform: uppercase; letter-spacing: .01em; }
+    .feat-headline em { font-family: var(--f-play); font-style: italic; font-weight: 300; color: var(--blue); }
+    #features .section-header .label { color: var(--blue); }
     .feat-rows { grid-column: 3 / 7; }
-    .feat-row { display: block; padding: clamp(20px,3vw,36px) 0; border-bottom: 1px solid var(--g1); cursor: default; }
-    .feat-row:last-child { border-bottom: none; }
+    .feat-row { display: block; padding: clamp(20px,3vw,36px) 0; border-bottom: none; background-image: repeating-linear-gradient(to right, var(--white) 0, var(--white) 8px, transparent 8px, transparent 18px); background-size: calc(100% - 9px) 1px; background-position: bottom left; background-repeat: no-repeat; cursor: default; }
+    .feat-row:last-child { border-bottom: none; background-image: none; }
     .feat-row:hover .feat-num { color: var(--red); }
     .feat-row:hover .feat-title { color: var(--white); }
     .feat-num { font-family: var(--f-mono); font-size: clamp(10px,1.2vw,12px); color: var(--blue); letter-spacing: .1em; padding-top: 4px; transition: color .2s; white-space: nowrap; }
