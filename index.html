@@ -213,8 +213,8 @@
     #features .section-header, #features .feat-body-wrap { position: relative; z-index: 1; }
     #features .section-header { border-bottom: none; padding-top: var(--sp-xl); }
     #features .section-header h2 { color: var(--white); }
-    .feat-body-wrap { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0 var(--gap); max-width: 1400px; margin: 0 auto; padding: 0 var(--px) var(--sp-xl); align-items: center; }
-    .feat-hero { grid-column: 1 / 3; padding-right: var(--sp-md); }
+    .feat-body-wrap { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0 var(--gap); max-width: 1400px; margin: 0 auto; padding: 0 var(--px) var(--sp-xl); align-items: stretch; }
+    .feat-hero { grid-column: 1 / 3; padding-right: var(--sp-md); display: flex; flex-direction: column; justify-content: flex-end; gap: clamp(24px, 3.5vw, 40px); }
     .feat-headline { font-family: var(--f-main); font-size: clamp(32px, 5vw, 72px); font-weight: 700; line-height: 1; text-transform: uppercase; letter-spacing: .01em; }
     .feat-headline em { font-family: var(--f-play); font-style: italic; font-weight: 300; color: var(--blue); }
     #features .section-header .label { color: var(--blue); }
@@ -226,10 +226,26 @@
     .feat-num { font-family: var(--f-mono); font-size: clamp(10px,1.2vw,12px); color: var(--blue); letter-spacing: .1em; padding-top: 4px; transition: color .2s; white-space: nowrap; }
     .feat-title { font-family: var(--f-display); font-size: clamp(14px,1.8vw,20px); font-weight: 700; text-transform: uppercase; letter-spacing: 0; line-height: 1.05; color: var(--g4); transition: color .2s; margin-bottom: 8px; }
     .feat-body { grid-column: 2; font-size: clamp(12px,1.4vw,13px); line-height: 1.75; color: var(--g3); }
+    .feat-tooltip { background: rgba(255,255,255,0.07); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); border: 1px solid rgba(255,255,255,0.13); border-radius: 12px; max-width: 340px; position: relative; overflow: hidden; }
+    .feat-tooltip-tab { display: flex; align-items: center; gap: 8px; padding: 10px clamp(16px, 2.2vw, 24px); cursor: pointer; user-select: none; border-bottom: 1px solid transparent; transition: border-color .25s; }
+    .feat-tooltip-tab::before { content: ''; display: block; width: 32px; height: 3px; background: var(--blue); border-radius: 2px; flex-shrink: 0; transition: width .25s; }
+    .feat-tooltip-tab:hover::before { width: 40px; }
+    .feat-tooltip-label { font-family: var(--f-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); }
+    .feat-tooltip-arrow { margin-left: auto; width: 12px; height: 12px; display: flex; align-items: center; justify-content: center; transition: transform .3s ease; }
+    .feat-tooltip-arrow svg { display: block; }
+    .feat-tooltip.open .feat-tooltip-arrow { transform: rotate(180deg); }
+    .feat-tooltip.open .feat-tooltip-tab { border-color: rgba(255,255,255,0.1); }
+    .feat-tooltip-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s ease; }
+    .feat-tooltip.open .feat-tooltip-body { grid-template-rows: 1fr; }
+    .feat-tooltip-inner { overflow: hidden; padding: 0 clamp(16px, 2.2vw, 24px); }
+    .feat-tooltip.open .feat-tooltip-inner { padding: clamp(14px, 2vw, 20px) clamp(16px, 2.2vw, 24px); }
+    .feat-tooltip-inner p { font-size: clamp(12px, 1.4vw, 13px); line-height: 1.75; color: rgba(255,255,255,0.65); }
+
     @media (max-width: 768px) {
       .feat-body-wrap { grid-template-columns: 1fr; }
       .feat-hero { grid-column: 1; position: static; padding-right: 0; margin-bottom: var(--sp-lg); }
       .feat-rows { grid-column: 1; }
+      .feat-tooltip { max-width: 100%; }
     }
 
     /* ─── PROCESS ─────────────────────────────────────── */
@@ -497,6 +513,17 @@
       <blockquote class="feat-headline">
         Custom<br />Proactive<br />Agents—<br /><em>governed<br />by you.</em>
       </blockquote>
+      <div class="feat-tooltip" id="feat-tooltip">
+        <div class="feat-tooltip-tab" id="feat-tooltip-tab">
+          <span class="feat-tooltip-label">Agent Layer</span>
+          <span class="feat-tooltip-arrow"><svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,0.4)"/></svg></span>
+        </div>
+        <div class="feat-tooltip-body">
+          <div class="feat-tooltip-inner">
+            <p>Agents built on your methodology and domain knowledge. They operate across your accounts, picking up work proactively and executing it at your standard. They don't wait for instructions. They track, flag, start, and surface.</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="feat-rows">
       <div class="feat-row animate">
@@ -524,29 +551,29 @@
 <section id="process">
   <div class="section-header animate">
     <span class="label label--red">04 / Section</span>
-    <h2>Section Title</h2>
-    <p>Short placeholder description for this section goes here.</p>
+    <h2>What this means for your team</h2>
+    <p></p>
   </div>
   <div class="proc-grid">
     <div class="proc-step animate">
       <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 01</span></div>
-      <h3>Step<br />Title</h3>
-      <p>Placeholder description for this step goes here.</p>
+      <h3>Time to first draft decreased</h3>
+      <p>Minutes, not days. Agents start work the moment a trigger hits.</p>
     </div>
     <div class="proc-step animate d1">
       <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 02</span></div>
-      <h3>Step<br />Title</h3>
-      <p>Placeholder description for this step goes here.</p>
+      <h3>Realization rate multiplied</h3>
+      <p>More billable output per team member. Less time on zero-to-one.</p>
     </div>
     <div class="proc-step animate d2">
       <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 03</span></div>
-      <h3>Step<br />Title</h3>
-      <p>Placeholder description for this step goes here.</p>
+      <h3>Agency throughput scaled</h3>
+      <p>Pipeline capacity scales without scaling headcount.</p>
     </div>
     <div class="proc-step animate">
       <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 04</span></div>
-      <h3>Step<br />Title</h3>
-      <p>Placeholder description for this step goes here.</p>
+      <h3>Team focus honed</h3>
+      <p>Your people do the collaborative, strategic work. Shadow handles everything up to that point.</p>
     </div>
     <div class="proc-step animate d1">
       <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 05</span></div>
@@ -721,6 +748,10 @@
     entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); observer.unobserve(entry.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+  const tooltipTab = document.getElementById('feat-tooltip-tab');
+  const tooltip = document.getElementById('feat-tooltip');
+  tooltipTab.addEventListener('click', () => tooltip.classList.toggle('open'));
 
 </script>
 </body>
