@@ -186,7 +186,15 @@
 
     /* ─── CAPABILITIES ────────────────────────────────── */
     .cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); max-width: 1400px; margin: 0 auto; padding: var(--sp-sm) var(--px); gap: 10px; }
-    .cap-card { padding: clamp(28px, 4vw, 48px) clamp(16px, 2.5vw, 28px); border: 1px solid var(--black); border-radius: var(--r-lg); display: flex; flex-direction: column; gap: clamp(12px, 2vw, 20px); transition: background .2s, color .2s; cursor: default; overflow: hidden; }
+    .cap-card { padding: clamp(28px, 4vw, 48px) clamp(16px, 2.5vw, 28px); border: 1px solid var(--black); border-radius: var(--r-lg); display: flex; flex-direction: column; gap: clamp(12px, 2vw, 20px); transition: background .2s, color .2s; cursor: default; overflow: hidden; position: relative; }
+    .cap-card::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(ellipse 120% 40% at 100% 15%, rgba(191,132,64,.30) 0%, transparent 55%), radial-gradient(ellipse 35% 95% at 8% 70%, rgba(116,137,163,.18) 0%, transparent 60%), radial-gradient(ellipse 45% 40% at 62% 55%, rgba(200,198,192,.12) 0%, transparent 65%); pointer-events: none; z-index: 0; transition: opacity .2s; }
+    .cap-card::after { content: ''; position: absolute; inset: -50%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; opacity: .18; mix-blend-mode: overlay; pointer-events: none; z-index: 0; }
+    .cap-card:nth-child(2)::before { background: radial-gradient(ellipse 110% 55% at 50% 110%, rgba(116,137,163,.28) 0%, transparent 55%), radial-gradient(ellipse 30% 35% at 7% 8%, rgba(191,132,64,.32) 0%, transparent 50%), radial-gradient(ellipse 45% 60% at 95% 48%, rgba(69,63,61,.14) 0%, transparent 65%); }
+    .cap-card:nth-child(3)::before { background: radial-gradient(ellipse 100% 30% at 50% -5%, rgba(191,132,64,.26) 0%, transparent 60%), radial-gradient(ellipse 40% 80% at 95% 60%, rgba(116,137,163,.22) 0%, transparent 55%), radial-gradient(ellipse 55% 45% at -5% 85%, rgba(69,63,61,.16) 0%, transparent 65%); }
+    .cap-card:nth-child(4)::before { background: radial-gradient(ellipse 50% 90% at -8% 55%, rgba(116,137,163,.28) 0%, transparent 55%), radial-gradient(ellipse 40% 45% at 88% 88%, rgba(191,132,64,.26) 0%, transparent 50%), radial-gradient(ellipse 85% 35% at 50% 45%, rgba(200,198,192,.12) 0%, transparent 70%); }
+    .cap-card:nth-child(5)::before { background: radial-gradient(ellipse 45% 50% at 92% 12%, rgba(191,132,64,.30) 0%, transparent 48%), radial-gradient(ellipse 55% 75% at 12% 80%, rgba(116,137,163,.26) 0%, transparent 55%), radial-gradient(ellipse 70% 30% at 50% 98%, rgba(69,63,61,.15) 0%, transparent 60%); }
+    .cap-card:nth-child(6)::before { background: radial-gradient(ellipse 90% 50% at 50% 105%, rgba(191,132,64,.24) 0%, transparent 55%), radial-gradient(ellipse 35% 45% at 5% 8%, rgba(116,137,163,.22) 0%, transparent 50%), radial-gradient(ellipse 55% 70% at 85% 35%, rgba(200,198,192,.14) 0%, transparent 65%); }
+    .cap-card > * { position: relative; z-index: 1; }
     .cap-card:hover { background: var(--black); color: var(--white); }
     .cap-card:hover .label { color: var(--blue); }
     .cap-card:hover .cap-num { color: var(--red); }
@@ -250,7 +258,15 @@
 
     /* ─── PROCESS ─────────────────────────────────────── */
     .proc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); max-width: 1400px; margin: 0 auto; padding: var(--sp-sm) var(--px); gap: 10px; border-top: none; }
-    .proc-step { padding: clamp(28px, 4vw, 48px) clamp(16px, 2.5vw, 28px); border: 1px solid var(--g5); border-radius: var(--r-lg); display: flex; flex-direction: column; gap: clamp(10px, 1.5vw, 16px); }
+    .proc-step { padding: clamp(28px, 4vw, 48px) clamp(16px, 2.5vw, 28px); border: 1px solid var(--g5); border-radius: var(--r-lg); display: flex; flex-direction: column; gap: clamp(10px, 1.5vw, 16px); position: relative; overflow: hidden; }
+    .proc-step::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(ellipse 55% 110% at 105% 50%, rgba(116,137,163,.26) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 5% 8%, rgba(191,132,64,.30) 0%, transparent 48%), radial-gradient(ellipse 75% 35% at 45% 95%, rgba(200,198,192,.12) 0%, transparent 65%); pointer-events: none; z-index: 0; }
+    .proc-step::after { content: ''; position: absolute; inset: -50%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; opacity: .18; mix-blend-mode: overlay; pointer-events: none; z-index: 0; }
+    .proc-step:nth-child(2)::before { background: radial-gradient(ellipse 45% 50% at 95% 5%, rgba(191,132,64,.28) 0%, transparent 50%), radial-gradient(ellipse 50% 45% at 5% 95%, rgba(191,132,64,.22) 0%, transparent 50%), radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200,198,192,.10) 0%, transparent 70%); }
+    .proc-step:nth-child(3)::before { background: radial-gradient(ellipse 110% 40% at 50% 105%, rgba(116,137,163,.28) 0%, transparent 55%), radial-gradient(ellipse 35% 40% at 92% 8%, rgba(191,132,64,.26) 0%, transparent 48%), radial-gradient(ellipse 40% 60% at 12% 45%, rgba(69,63,61,.14) 0%, transparent 60%); }
+    .proc-step:nth-child(4)::before { background: radial-gradient(ellipse 60% 80% at 115% 40%, rgba(191,132,64,.28) 0%, transparent 55%), radial-gradient(ellipse 35% 35% at 5% 10%, rgba(116,137,163,.30) 0%, transparent 48%), radial-gradient(ellipse 80% 30% at 45% 2%, rgba(200,198,192,.13) 0%, transparent 65%); }
+    .proc-step:nth-child(5)::before { background: radial-gradient(ellipse 50% 65% at 25% 50%, rgba(116,137,163,.26) 0%, transparent 55%), radial-gradient(ellipse 50% 65% at 75% 50%, rgba(191,132,64,.24) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 50% 5%, rgba(69,63,61,.12) 0%, transparent 60%); }
+    .proc-step:nth-child(6)::before { background: radial-gradient(ellipse 55% 65% at 8% 88%, rgba(191,132,64,.30) 0%, transparent 52%), radial-gradient(ellipse 50% 60% at 95% 10%, rgba(116,137,163,.26) 0%, transparent 55%), radial-gradient(ellipse 85% 30% at 50% 50%, rgba(200,198,192,.11) 0%, transparent 65%); }
+    .proc-step > * { position: relative; z-index: 1; }
     .proc-num-row { display: flex; align-items: center; gap: 10px; }
     .proc-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
     .proc-step-num { font-family: var(--f-mono); font-size: clamp(9px, 1.2vw, 11px); color: var(--g3); letter-spacing: .1em; }
@@ -602,7 +618,7 @@
 <section id="work">
   <div class="section-header animate">
     <span class="label label--red">05 / Section</span>
-    <h2>Section Title</h2>
+    <h2>Blog</h2>
     <p>Short placeholder description for this section goes here.</p>
   </div>
   <div class="work-grid">
@@ -659,10 +675,10 @@
     </div>
     <div class="about-content animate d2">
       <span class="label label--red">06 / Section</span>
-      <h2>Section<br />Heading <em>Here.</em></h2>
-      <p>Placeholder paragraph text for this section.</p>
-      <p>A second placeholder paragraph to fill out the layout. Add as much or as little as needed here.</p>
-      <p>A third placeholder paragraph. This section supports up to three paragraphs before the facts grid.</p>
+      <h2>Built for communications agencies.</em></h2>
+      <p>Shadow knows the difference between a pitch and a proposal, what a media list requires, what a press moment demands, and how award applications are won. Every layer exists because it reflects a real function in a real agency's program — built from the ground up for the agencies running the world's most important communications work.</p>
+      <p></p>
+      <p></p>
       <div class="about-facts">
         <div class="about-fact"><div class="about-fact-num">—<b></b></div><p>Fact label</p></div>
         <div class="about-fact"><div class="about-fact-num">—<b></b></div><p>Fact label</p></div>
@@ -677,7 +693,7 @@
 <section id="clients">
   <div class="section-header animate">
     <span class="label label--red">07 / Section</span>
-    <h2>Section Title</h2>
+    <h2>What Clients Have to Say</h2>
     <p>Short placeholder description for this section goes here.</p>
   </div>
   <div class="cl-grid animate">
