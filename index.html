@@ -206,6 +206,25 @@
     .manifesto-sub { grid-column: 2; display: flex; flex-direction: column; gap: var(--sp-md); border-top: 1px solid var(--g1); padding-top: var(--sp-md); }
     .manifesto-sub p { font-size: clamp(12px, 1.5vw, 14px); line-height: 1.7; color: var(--g3); max-width: 480px; }
 
+    /* ─── FEATURE ROWS ────────────────────────────────── */
+    #features { background: var(--black); color: var(--white); }
+    .feat-body-wrap { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0 var(--gap); max-width: 1400px; margin: 0 auto; padding: var(--sp-xl) var(--px) var(--sp-xl); align-items: start; }
+    .feat-hero { grid-column: 1 / 3; padding-right: var(--sp-md); position: sticky; top: clamp(80px, 10vw, 120px); }
+    .feat-headline { font-family: var(--f-display); font-size: clamp(32px, 5vw, 72px); font-weight: 700; line-height: 1; text-transform: uppercase; letter-spacing: .01em; }
+    .feat-headline em { font-style: italic; font-weight: 300; color: var(--g3); }
+    .feat-rows { grid-column: 3 / 7; border-top: 1px solid var(--g1); }
+    .feat-row { display: block; padding: clamp(20px,3vw,36px) 0; border-bottom: 1px solid var(--g1); cursor: default; }
+    .feat-row:hover .feat-num { color: var(--red); }
+    .feat-row:hover .feat-title { color: var(--white); }
+    .feat-num { font-family: var(--f-mono); font-size: clamp(10px,1.2vw,12px); color: var(--blue); letter-spacing: .1em; padding-top: 4px; transition: color .2s; white-space: nowrap; }
+    .feat-title { font-family: var(--f-display); font-size: clamp(14px,1.8vw,20px); font-weight: 700; text-transform: uppercase; letter-spacing: 0; line-height: 1.05; color: var(--g4); transition: color .2s; margin-bottom: 8px; }
+    .feat-body { grid-column: 2; font-size: clamp(12px,1.4vw,13px); line-height: 1.75; color: var(--g3); }
+    @media (max-width: 768px) {
+      .feat-body-wrap { grid-template-columns: 1fr; }
+      .feat-hero { grid-column: 1; position: static; padding-right: 0; margin-bottom: var(--sp-lg); }
+      .feat-rows { grid-column: 1; }
+    }
+
     /* ─── PROCESS ─────────────────────────────────────── */
     .proc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); max-width: 1400px; margin: 0 auto; padding: var(--sp-sm) var(--px); gap: 10px; border-top: none; }
     .proc-step { padding: clamp(28px, 4vw, 48px) clamp(16px, 2.5vw, 28px); border: 1px solid var(--g5); border-radius: var(--r-lg); display: flex; flex-direction: column; gap: clamp(10px, 1.5vw, 16px); }
@@ -462,16 +481,36 @@
   </div>
 </section>
 
-<section id="manifesto">
-  <div class="manifesto-inner">
-    <span class="label">03 / Section</span>
-    <blockquote class="animate">
-      Placeholder<br />headline<br />text—<br /><em>goes<br />here.</em>
-    </blockquote>
-    <div class="manifesto-sub animate d2">
-      <p>Placeholder supporting text for this section. Replace with your own copy when ready.</p>
-      <p>A second line of placeholder supporting text to fill out the layout as needed.</p>
-      <a href="#about" class="btn btn--fill">Read More →</a>
+<section id="features">
+  <div class="section-header animate">
+    <span class="label label--red">03 / System</span>
+    <h2>&nbsp;</h2>
+  </div>
+  <div class="feat-body-wrap">
+    <div class="feat-hero animate">
+      <blockquote class="feat-headline">
+        Custom<br />Proactive<br />Agents—<br /><em>governed<br />by you.</em>
+      </blockquote>
+    </div>
+    <div class="feat-rows">
+      <div class="feat-row animate">
+        <div>
+          <div class="feat-title">Governance Infrastructure</div>
+          <p class="feat-body">Your best work, systematized. Shadow captures how your senior people operate and encodes it into governance SOPs that run across every account. This keeps voice, flow, and approach consistent across engagements.</p>
+        </div>
+      </div>
+      <div class="feat-row animate d1">
+        <div>
+          <div class="feat-title">Always Progressing</div>
+          <p class="feat-body">Deliverables, onboarding sequences, and account programs move forward without being prompted.</p>
+        </div>
+      </div>
+      <div class="feat-row animate d2">
+        <div>
+          <div class="feat-title">Meets You Where You Are</div>
+          <p class="feat-body">Integrated with your stack: HubSpot, your CRM, and your existing tools. Notifications in Slack, email, or wherever your team works. Or move to Shadow's AI-native CRM built specifically for agency workflows.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
