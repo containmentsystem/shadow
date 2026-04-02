@@ -207,7 +207,9 @@
     .manifesto-sub p { font-size: clamp(12px, 1.5vw, 14px); line-height: 1.7; color: var(--g3); max-width: 480px; }
 
     /* ─── FEATURE ROWS ────────────────────────────────── */
-    #features { background: var(--black); color: var(--white); border-bottom: none; }
+    #features { background: var(--black); color: var(--white); border-bottom: none; position: relative; overflow: hidden; }
+    #features::before { content: ''; position: absolute; inset: 0; background: url('images/image 6.png') center center / cover no-repeat; opacity: 0.55; pointer-events: none; mix-blend-mode: screen; z-index: 0; }
+    #features .section-header, #features .feat-body-wrap { position: relative; z-index: 1; }
     #features .section-header { border-bottom: none; padding-top: var(--sp-xl); }
     #features .section-header h2 { color: var(--white); }
     .feat-body-wrap { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0 var(--gap); max-width: 1400px; margin: 0 auto; padding: 0 var(--px) var(--sp-xl); align-items: center; }
