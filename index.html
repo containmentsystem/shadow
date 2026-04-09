@@ -68,7 +68,7 @@
       letter-spacing: .1em;
       text-transform: uppercase;
       padding: clamp(10px, 2vw, 12px) clamp(16px, 3vw, 22px);
-      border: 1.5px solid var(--black);
+      border: 1px solid var(--black);
       background: transparent;
       cursor: pointer;
       white-space: nowrap;
@@ -84,6 +84,10 @@
     .btn--ghost             { border-color: rgba(224,223,221,0.28); color: var(--white); }
     .btn--ghost:hover       { background: rgba(224,223,221,0.08); border-color: rgba(224,223,221,0.55); }
     .btn--white:hover       { background: var(--black); color: var(--white); border-color: var(--black); }
+    .btn--noise { position: relative; overflow: hidden; }
+    .btn--noise::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(ellipse 120% 40% at 100% 15%, rgba(191,132,64,.30) 0%, transparent 55%), radial-gradient(ellipse 35% 95% at 8% 70%, rgba(116,137,163,.18) 0%, transparent 60%), radial-gradient(ellipse 45% 40% at 62% 55%, rgba(200,198,192,.12) 0%, transparent 65%); pointer-events: none; z-index: 0; }
+    .btn--noise::after { content: ''; position: absolute; inset: -50%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; opacity: .18; mix-blend-mode: overlay; pointer-events: none; z-index: 0; }
+    .btn--noise span { position: relative; z-index: 1; }
 
     /* ─── NAV ─────────────────────────────────────────── */
     nav {
@@ -191,8 +195,8 @@
     @media (min-width: 768px) { .cap-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (min-width: 1025px) { .cap-grid { grid-template-columns: repeat(6, 1fr); } }
     .cap-card { padding: clamp(20px, 3vw, 36px) clamp(12px, 1.5vw, 20px); border: 1px solid var(--black); border-radius: var(--r-lg); display: flex; flex-direction: column; gap: clamp(12px, 2vw, 20px); transition: background .2s, color .2s; cursor: default; overflow: hidden; position: relative; }
-    .cap-card::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(ellipse 120% 40% at 100% 15%, rgba(191,132,64,.30) 0%, transparent 55%), radial-gradient(ellipse 35% 95% at 8% 70%, rgba(116,137,163,.18) 0%, transparent 60%), radial-gradient(ellipse 45% 40% at 62% 55%, rgba(200,198,192,.12) 0%, transparent 65%); pointer-events: none; z-index: 0; transition: opacity .2s; }
-    .cap-card::after { content: ''; position: absolute; inset: -50%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; opacity: .18; mix-blend-mode: overlay; pointer-events: none; z-index: 0; }
+    .cap-card::before { content: ''; position: absolute; inset: -40% 0; border-radius: inherit; background: radial-gradient(ellipse 120% 40% at 100% 15%, rgba(191,132,64,.30) 0%, transparent 55%), radial-gradient(ellipse 35% 95% at 8% 70%, rgba(116,137,163,.18) 0%, transparent 60%), radial-gradient(ellipse 45% 40% at 62% 55%, rgba(200,198,192,.12) 0%, transparent 65%); pointer-events: none; z-index: 0; transition: opacity .2s; transform: translateY(var(--parallax, 0px)); will-change: transform; }
+    .cap-card::after { content: ''; position: absolute; inset: -50%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; opacity: .18; mix-blend-mode: overlay; pointer-events: none; z-index: 0; transform: translateY(var(--parallax, 0px)); will-change: transform; }
     .cap-card:nth-child(2)::before { background: radial-gradient(ellipse 110% 55% at 50% 110%, rgba(116,137,163,.28) 0%, transparent 55%), radial-gradient(ellipse 30% 35% at 7% 8%, rgba(191,132,64,.32) 0%, transparent 50%), radial-gradient(ellipse 45% 60% at 95% 48%, rgba(69,63,61,.14) 0%, transparent 65%); }
     .cap-card:nth-child(3)::before { background: radial-gradient(ellipse 100% 30% at 50% -5%, rgba(191,132,64,.26) 0%, transparent 60%), radial-gradient(ellipse 40% 80% at 95% 60%, rgba(116,137,163,.22) 0%, transparent 55%), radial-gradient(ellipse 55% 45% at -5% 85%, rgba(69,63,61,.16) 0%, transparent 65%); }
     .cap-card:nth-child(4)::before { background: radial-gradient(ellipse 50% 90% at -8% 55%, rgba(116,137,163,.28) 0%, transparent 55%), radial-gradient(ellipse 40% 45% at 88% 88%, rgba(191,132,64,.26) 0%, transparent 50%), radial-gradient(ellipse 85% 35% at 50% 45%, rgba(200,198,192,.12) 0%, transparent 70%); }
@@ -206,7 +210,7 @@
     .cap-card:hover .rule--light { background: var(--white); }
     .cap-card:hover p { color: var(--g4); }
     .cap-num { font-family: var(--f-body); font-size: clamp(40px, 6vw, 72px); font-weight: 900; line-height: 1; color: var(--blue); transition: color .2s; }
-    .cap-card h3 { font-family: var(--f-display); font-size: clamp(16px, 2.5vw, 22px); font-weight: 700; text-transform: uppercase; letter-spacing: 0; line-height: 1.1; }
+    .cap-card h3 { font-family: var(--f-display); font-size: clamp(16px, 2.5vw, 18px); font-weight: 700; text-transform: uppercase; letter-spacing: 0; line-height: 1.1; }
     .cap-card p { font-size: clamp(12px, 1.5vw, 13px); line-height: 1.65; color: var(--g3); }
     .cap-arrow { margin-top: auto; font-family: var(--f-mono); font-size: clamp(16px, 2.5vw, 22px); }
 
@@ -220,8 +224,8 @@
     .manifesto-sub p { font-size: clamp(12px, 1.5vw, 14px); line-height: 1.7; color: var(--g3); max-width: 480px; }
 
     /* ─── FEATURE ROWS ────────────────────────────────── */
-    #features { background: var(--white); color: var(--black); border-bottom: none; position: relative; overflow: hidden; }
-    #features::before { content: ''; position: absolute; inset: 0; background: url('images/image 6.png') center center / cover no-repeat; opacity: 0.08; pointer-events: none; mix-blend-mode: multiply; z-index: 0; }
+    #features { background-color: var(--white); color: var(--black); position: relative; overflow: hidden; }
+    #features::before { content: ''; position: absolute; inset: 0; background: url('images/image 6.png') center center / cover no-repeat; opacity: 0.45; pointer-events: none; mix-blend-mode: multiply; filter: invert(1); z-index: 0; }
     #features .section-header, #features .feat-body-wrap { position: relative; z-index: 1; }
     #features .section-header { border-bottom: none; padding-top: var(--sp-md); }
     #features .section-header h2 { color: var(--black); }
@@ -261,12 +265,16 @@
     }
 
     /* ─── PROCESS ─────────────────────────────────────── */
-    .proc-grid { display: grid; grid-template-columns: repeat(2, 1fr); max-width: 1400px; margin: 0 auto; padding: var(--sp-sm) var(--px); gap: 10px; border-top: none; }
-    @media (min-width: 768px) { .proc-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (min-width: 1025px) { .proc-grid { grid-template-columns: repeat(6, 1fr); } }
+    #process { background-image: none; }
+    .proc-met-grid { display: grid; grid-template-columns: repeat(2, 1fr); max-width: 1400px; margin: 0 auto; padding: var(--sp-sm) var(--px) var(--sp-md); column-gap: 10px; row-gap: 0; align-items: start; grid-auto-rows: 1fr; }
+    @media (min-width: 768px) { .proc-met-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 1025px) { .proc-met-grid { grid-template-columns: repeat(6, 1fr); } }
+    .proc-met-grid > *:nth-child(-n+6) { align-self: start; }
+    .proc-met-grid > *:nth-child(n+7)  { align-self: end; }
+    .proc-step, .met-cell { padding: clamp(20px, 3vw, 36px) clamp(12px, 1.5vw, 20px); border: 1px solid var(--black); border-radius: var(--r-lg); display: flex; flex-direction: column; gap: clamp(10px, 1.5vw, 16px); position: relative; overflow: hidden; }
     .proc-step { padding: clamp(20px, 3vw, 36px) clamp(12px, 1.5vw, 20px); border: 1px solid var(--g5); border-radius: var(--r-lg); display: flex; flex-direction: column; gap: clamp(10px, 1.5vw, 16px); position: relative; overflow: hidden; }
-    .proc-step::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(ellipse 55% 110% at 105% 50%, rgba(116,137,163,.26) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 5% 8%, rgba(191,132,64,.30) 0%, transparent 48%), radial-gradient(ellipse 75% 35% at 45% 95%, rgba(200,198,192,.12) 0%, transparent 65%); pointer-events: none; z-index: 0; }
-    .proc-step::after { content: ''; position: absolute; inset: -50%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; opacity: .18; mix-blend-mode: overlay; pointer-events: none; z-index: 0; }
+    .proc-step::before { content: ''; position: absolute; inset: -40% 0; border-radius: inherit; background: radial-gradient(ellipse 55% 110% at 105% 50%, rgba(116,137,163,.26) 0%, transparent 55%), radial-gradient(ellipse 40% 40% at 5% 8%, rgba(191,132,64,.30) 0%, transparent 48%), radial-gradient(ellipse 75% 35% at 45% 95%, rgba(200,198,192,.12) 0%, transparent 65%); pointer-events: none; z-index: 0; transform: translateY(var(--parallax, 0px)); will-change: transform; }
+    .proc-step::after { content: ''; position: absolute; inset: -50%; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; opacity: .18; mix-blend-mode: overlay; pointer-events: none; z-index: 0; transform: translateY(var(--parallax, 0px)); will-change: transform; }
     .proc-step:nth-child(2)::before { background: radial-gradient(ellipse 45% 50% at 95% 5%, rgba(191,132,64,.28) 0%, transparent 50%), radial-gradient(ellipse 50% 45% at 5% 95%, rgba(191,132,64,.22) 0%, transparent 50%), radial-gradient(ellipse 60% 60% at 50% 50%, rgba(200,198,192,.10) 0%, transparent 70%); }
     .proc-step:nth-child(3)::before { background: radial-gradient(ellipse 110% 40% at 50% 105%, rgba(116,137,163,.28) 0%, transparent 55%), radial-gradient(ellipse 35% 40% at 92% 8%, rgba(191,132,64,.26) 0%, transparent 48%), radial-gradient(ellipse 40% 60% at 12% 45%, rgba(69,63,61,.14) 0%, transparent 60%); }
     .proc-step:nth-child(4)::before { background: radial-gradient(ellipse 60% 80% at 115% 40%, rgba(191,132,64,.28) 0%, transparent 55%), radial-gradient(ellipse 35% 35% at 5% 10%, rgba(116,137,163,.30) 0%, transparent 48%), radial-gradient(ellipse 80% 30% at 45% 2%, rgba(200,198,192,.13) 0%, transparent 65%); }
@@ -425,7 +433,7 @@
       <p class="hero-sub">Scale your agency without scaling your headcount. Shadow is embedded communications infrastructure that runs your methodology across every client, persistently and proactively.</p>
       <div class="hero-actions">
         <a href="#work" class="btn btn--red">Get started</a>
-        <a href="#about" class="btn">Learn more →</a>
+        <a href="#about" class="btn btn--noise"><span>Learn more →</span></a>
       </div>
     </div>
   </div>
@@ -529,7 +537,6 @@
       <div class="label label--red">What it covers</div>
       <p>Your methodology encoded into SOPs. Your voice, your quality bar, your approach — enforced across every account.</p>
       <div class="cap-arrow">→</div>
-    </div>
   </div>
 </section>
 
@@ -583,48 +590,45 @@
     <h2>What this means for your team</h2>
     <p></p>
   </div>
-  <div class="proc-grid">
+  <div class="proc-met-grid">
+    <!-- Row 1: Step1, Metric, Step3, Metric, Step5, Metric -->
     <div class="proc-step animate">
       <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 01</span></div>
       <h3>Time to first draft decreased</h3>
       <p>Minutes, not days. Agents start work the moment a trigger hits.</p>
     </div>
-    <div class="proc-step animate d1">
-      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 02</span></div>
-      <h3>Realization rate multiplied</h3>
-      <p>More billable output per team member. Less time on zero-to-one.</p>
-    </div>
+    <div class="met-cell animate d1"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
     <div class="proc-step animate d2">
       <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 03</span></div>
       <h3>Agency throughput scaled</h3>
       <p>Pipeline capacity scales without scaling headcount.</p>
     </div>
-    <div class="proc-step animate">
-      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 04</span></div>
-      <h3>Team focus honed</h3>
-      <p>Your people do the collaborative, strategic work. Shadow handles everything up to that point.</p>
-    </div>
+    <div class="met-cell animate"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
     <div class="proc-step animate d1">
       <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 05</span></div>
       <h3>Step<br />Title</h3>
       <p>Placeholder description for this step goes here.</p>
     </div>
+    <div class="met-cell animate d2"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
+    <!-- Row 2: Metric, Step2, Metric, Step4, Metric, Step6 -->
+    <div class="met-cell animate"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
+    <div class="proc-step animate d1">
+      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 02</span></div>
+      <h3>Realization rate multiplied</h3>
+      <p>More billable output per team member. Less time on zero-to-one.</p>
+    </div>
+    <div class="met-cell animate d2"><div class="met-value">—</div><div class="met-label">Metric Label</div></div>
+    <div class="proc-step animate">
+      <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 04</span></div>
+      <h3>Team focus honed</h3>
+      <p>Your people do the collaborative, strategic work. Shadow handles everything up to that point.</p>
+    </div>
+    <div class="met-cell animate d1"><div class="met-value">—</div><div class="met-label">Metric Label</div></div>
     <div class="proc-step animate d2">
       <div class="proc-num-row"><div class="proc-dot"></div><span class="proc-step-num">Step 06</span></div>
       <h3>Step<br />Title</h3>
       <p>Placeholder description for this step goes here.</p>
     </div>
-  </div>
-</section>
-
-<section id="metrics">
-  <div class="met-grid">
-    <div class="met-cell animate"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
-    <div class="met-cell animate d1"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
-    <div class="met-cell animate d2"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
-    <div class="met-cell animate"><div class="met-value">—</div><div class="met-label">Metric Label</div></div>
-    <div class="met-cell animate d1"><div class="met-value">—<sup></sup></div><div class="met-label">Metric Label</div></div>
-    <div class="met-cell animate d2"><div class="met-value">—</div><div class="met-label">Metric Label</div></div>
   </div>
 </section>
 
@@ -785,6 +789,18 @@
   const capTipTab = document.getElementById('cap-header-tip-tab');
   const capTip = document.getElementById('cap-header-tip');
   capTipTab.addEventListener('click', () => capTip.classList.toggle('open'));
+
+  const parallaxEls = document.querySelectorAll('.cap-card, .proc-step');
+  function updateParallax() {
+    const vh = window.innerHeight;
+    parallaxEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const center = (rect.top + rect.height / 2) - vh / 2;
+      el.style.setProperty('--parallax', `${center * 0.18}px`);
+    });
+  }
+  window.addEventListener('scroll', updateParallax, { passive: true });
+  updateParallax();
 
 </script>
 </body>
