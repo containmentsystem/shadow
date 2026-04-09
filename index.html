@@ -301,14 +301,8 @@
     .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); max-width: 1400px; margin: 0 auto; padding: var(--sp-sm) var(--px); gap: 12px; border-top: none; }
     .work-card { padding: clamp(24px, 4vw, 48px) clamp(16px, 2vw, 24px); border: 1px solid var(--black); border-radius: var(--r-xl); display: flex; flex-direction: column; gap: clamp(12px, 2vw, 18px); overflow: hidden; }
     .work-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; border-radius: calc(var(--r-xl) - 4px); }
-    .work-bg { width: 100%; height: 100%; transition: transform .4s ease; }
-    .work-card:hover .work-bg { transform: scale(1.03); }
-    .work-bg-1 { background: linear-gradient(135deg, #0a0a0a 0%, #1c1c1c 60%, #977BA1 100%); }
-    .work-bg-2 { background: linear-gradient(135deg, #1a1a2e 0%, #7F7265 60%, #7F7265 100%); }
-    .work-bg-3 { background: linear-gradient(135deg, #2d2d2d 0%, #3a3a3a 50%, #c8c6c0 100%); }
-    .work-bg-4 { background: linear-gradient(135deg, #0a0a0a 0%, #7489A3 60%, #0a0a0a 100%); }
-    .work-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-    .work-overlay-text { font-family: var(--f-display); font-size: clamp(40px, 7vw, 64px); font-weight: 900; color: rgba(255,255,255,.06); text-transform: uppercase; letter-spacing: .05em; }
+    .work-photo { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; background: var(--black); }
+    .work-card:hover .work-photo { transform: scale(1.03); }
     .work-meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
     .work-card h3 { font-family: var(--f-display); font-size: clamp(18px, 3vw, 26px); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; line-height: 1.1; }
     .work-card p { font-size: clamp(12px, 1.5vw, 13px); line-height: 1.65; color: var(--g2); }
@@ -317,8 +311,7 @@
     /* ─── ABOUT ───────────────────────────────────────── */
     .about-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--sp-lg); max-width: 1400px; margin: 0 auto; padding: var(--sp-xl) var(--px); align-items: start; }
     .about-img { width: 100%; aspect-ratio: 3/4; background: var(--black); display: flex; align-items: flex-end; padding: clamp(20px, 4vw, 36px); overflow: hidden; position: relative; border-radius: var(--r-xl); }
-    .about-img-pattern { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,.04) 39px, rgba(255,255,255,.04) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,.04) 39px, rgba(255,255,255,.04) 40px); }
-    .about-img-accent { position: absolute; top: 0; right: 0; width: 38%; height: 28%; background: var(--red); }
+    .about-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
     .about-img-caption { position: relative; z-index: 1; font-family: var(--f-mono); font-size: clamp(9px, 1.3vw, 11px); color: rgba(255,255,255,.5); letter-spacing: .1em; text-transform: uppercase; line-height: 1.6; }
     .about-img-caption strong { display: block; font-family: var(--f-display); font-size: clamp(28px, 4vw, 40px); font-weight: 900; color: var(--white); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
     .about-content { display: flex; flex-direction: column; gap: clamp(16px, 3vw, 28px); }
@@ -642,7 +635,7 @@
   <div class="work-grid">
     <div class="work-card animate">
       <div class="work-thumb">
-        <div class="work-bg work-bg-1"><div class="work-overlay"><span class="work-overlay-text">—</span></div></div>
+        <img class="work-photo" src="./images/about.png" alt="">
       </div>
       <div class="work-meta"><span class="label">Category</span><span class="label">0001</span></div>
       <h3>The Attention Shift:</h3>
@@ -651,7 +644,7 @@
     </div>
     <div class="work-card animate d2">
       <div class="work-thumb">
-        <div class="work-bg work-bg-2"><div class="work-overlay"><span class="work-overlay-text">—</span></div></div>
+        <img class="work-photo" src="./images/about.png" alt="">
       </div>
       <div class="work-meta"><span class="label">Category</span><span class="label">0002</span></div>
       <h3>The Trust Shift:</h3>
@@ -660,7 +653,7 @@
     </div>
     <div class="work-card animate">
       <div class="work-thumb">
-        <div class="work-bg work-bg-3"><div class="work-overlay"><span class="work-overlay-text">—</span></div></div>
+        <img class="work-photo" src="./images/about.png" alt="">
       </div>
       <div class="work-meta"><span class="label">Category</span><span class="label">0000</span></div>
       <h3>The Measurement Trap:</h3>
@@ -669,7 +662,7 @@
     </div>
     <div class="work-card animate d2">
       <div class="work-thumb">
-        <div class="work-bg work-bg-4"><div class="work-overlay"><span class="work-overlay-text">—</span></div></div>
+        <img class="work-photo" src="./images/about.png" alt="">
       </div>
       <div class="work-meta"><span class="label">Category</span><span class="label">0000</span></div>
       <h3>The Business Model Crisis:</h3>
@@ -683,8 +676,7 @@
   <div class="about-body">
     <div class="animate">
       <div class="about-img">
-        <div class="about-img-pattern"></div>
-        <div class="about-img-accent"></div>
+        <img class="about-photo" src="./images/about.png" alt="">
         <div class="about-img-caption">
           <strong>Shadow</strong>
           California — San Francisco<br />Est. 2024
