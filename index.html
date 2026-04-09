@@ -231,8 +231,8 @@
     #features .section-header { border-bottom: none; padding-top: var(--sp-md); }
     #features .section-header h2 { color: var(--black); position: relative; z-index: 2; }
     .feat-body-wrap { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0 var(--gap); max-width: 1400px; margin: 0 auto; padding: 0 var(--px) var(--sp-xl); align-items: stretch; }
-    .feat-hero { grid-column: 1 / 3; padding-right: var(--sp-md); display: flex; flex-direction: column; justify-content: flex-end; gap: clamp(24px, 3.5vw, 40px); }
-    .feat-headline { font-family: var(--f-main); font-size: clamp(32px, 5vw, 72px); font-weight: 700; line-height: 1; text-transform: uppercase; letter-spacing: .01em; }
+    .feat-hero { grid-column: 1 / 3; padding-right: var(--sp-md); padding-top: clamp(20px,3vw,36px); display: flex; flex-direction: column; justify-content: space-between; gap: clamp(24px, 3.5vw, 40px); }
+    .feat-headline { font-family: var(--f-main); font-size: clamp(28px, 5vw, 64px); font-weight: 700; line-height: 1; text-transform: uppercase; letter-spacing: .01em; margin: 0; }
     .feat-headline em { font-family: var(--f-play); font-style: italic; font-weight: 300; color: var(--blue); }
     #features .section-header .label { color: var(--blue); }
     .feat-rows { grid-column: 3 / 7; }
@@ -304,14 +304,37 @@
     .work-meta { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px; }
     .work-card h3 { font-family: var(--f-display); font-size: clamp(18px, 3vw, 26px); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; line-height: 1.1; }
     .work-card p { font-size: clamp(12px, 1.5vw, 13px); line-height: 1.65; color: var(--g2); }
-    .work-link { font-family: var(--f-mono); font-size: clamp(10px, 1.3vw, 12px); letter-spacing: .1em; text-transform: uppercase; color: var(--red); display: flex; align-items: center; gap: 8px; }
+    .work-link { font-family: var(--f-mono); font-size: clamp(10px, 1.3vw, 12px); letter-spacing: .1em; text-transform: uppercase; color: var(--red); display: flex; align-items: center; gap: 8px; cursor: pointer; }
+
+    /* ─── BLOG OVERLAY ────────────────────────────────── */
+    .blog-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: clamp(16px, 4vw, 48px); pointer-events: none; }
+    .blog-overlay.open { pointer-events: all; }
+    .blog-overlay-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0); backdrop-filter: blur(0px); transition: background .35s ease, backdrop-filter .35s ease; }
+    .blog-overlay.open .blog-overlay-backdrop { background: rgba(0,0,0,.55); backdrop-filter: blur(6px); }
+    .blog-overlay-panel { position: relative; background: var(--white); border: 1px solid var(--black); border-radius: var(--r-xl); width: 100%; max-width: 680px; height: 85vh; display: flex; flex-direction: column; padding: clamp(24px, 5vw, 56px); overflow: hidden; opacity: 0; transform: translateY(32px) scale(.97); transition: opacity .35s ease, transform .35s ease; }
+    .blog-overlay.open .blog-overlay-panel { opacity: 1; transform: translateY(0) scale(1); }
+    .blog-overlay-close { position: absolute; top: 20px; right: 20px; width: 36px; height: 36px; border: 1px solid var(--g5); border-radius: 50%; background: transparent; font-size: 20px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--black); transition: background .2s, border-color .2s; }
+    .blog-overlay-close:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+    .blog-overlay-header { flex-shrink: 0; }
+    .blog-overlay-title { font-family: var(--f-main); font-size: clamp(22px, 4vw, 36px); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; line-height: 1.1; margin-bottom: 12px; }
+    .blog-overlay-subtitle { font-family: var(--f-mono); font-size: clamp(11px, 1.5vw, 13px); letter-spacing: .08em; text-transform: uppercase; color: var(--red); margin-bottom: 0; }
+    .blog-overlay-divider { height: 1px; background: var(--g5); margin: 20px 0; }
+    .blog-overlay-body-wrap { flex: 1 1 0; min-height: 0; overflow: hidden; }
+    .blog-overlay-body { font-size: clamp(14px, 1.8vw, 16px); line-height: 1.75; color: var(--g2); display: block; }
+    @keyframes blogPageIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: translateX(0); } }
+    .blog-overlay-body.page-turn { animation: blogPageIn .22s ease forwards; }
+    .blog-overlay-pagination { flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--g5); }
+    .blog-overlay-pagination[hidden] { display: none; }
+    .blog-page-btn { font-family: var(--f-mono); font-size: clamp(10px, 1.3vw, 11px); letter-spacing: .1em; text-transform: uppercase; color: var(--red); background: none; border: none; cursor: pointer; padding: 4px 0; transition: opacity .15s; }
+    .blog-page-btn:disabled { opacity: .25; cursor: default; }
+    .blog-page-count { font-family: var(--f-mono); font-size: clamp(10px, 1.3vw, 11px); letter-spacing: .1em; color: var(--g3); }
 
     /* ─── ABOUT ───────────────────────────────────────── */
     .about-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--sp-lg); max-width: 1400px; margin: 0 auto; padding: var(--sp-xl) var(--px); align-items: start; }
     .about-img { width: 100%; aspect-ratio: 3/4; background: var(--black); display: flex; align-items: flex-end; padding: clamp(20px, 4vw, 36px); overflow: hidden; position: relative; border-radius: var(--r-xl); }
     .about-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-    .about-img-caption { position: relative; z-index: 1; font-family: var(--f-mono); font-size: clamp(9px, 1.3vw, 11px); color: rgba(255,255,255,.5); letter-spacing: .1em; text-transform: uppercase; line-height: 1.6; }
-    .about-img-caption strong { display: block; font-family: var(--f-display); font-size: clamp(28px, 4vw, 40px); font-weight: 900; color: var(--white); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
+    .about-img-caption { position: relative; z-index: 1; font-family: var(--f-mono); font-size: clamp(9px, 1.3vw, 11px); color: rgba(0,0,0,.5); letter-spacing: .1em; text-transform: uppercase; line-height: 1.6; }
+    .about-img-caption strong { display: block; font-family: var(--f-main); font-size: clamp(28px, 4vw, 40px); font-weight: 900; color: var(--black); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 6px; }
     .about-content { display: flex; flex-direction: column; gap: clamp(16px, 3vw, 28px); }
     .about-content h2 { font-family: var(--f-main); font-size: clamp(26px, 4vw, 48px); font-weight: 900; text-transform: uppercase; line-height: 1.05; letter-spacing: .01em; }
     .about-content h2 em { font-style: italic; font-weight: 300; color: var(--g3); }
@@ -631,44 +654,77 @@
     <p></p>
   </div>
   <div class="work-grid">
-    <div class="work-card animate">
+    <div class="work-card animate"
+      data-blog-title="The Attention Shift:"
+      data-blog-subtitle="How Public Discourse Decentralized"
+      data-blog-body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.">
       <div class="work-thumb">
         <img class="work-photo" src="./images/about.png" alt="">
       </div>
       <div class="work-meta"><span class="label">Category</span><span class="label">0001</span></div>
       <h3>The Attention Shift:</h3>
       <p>How Public Discourse Decentralized</p>
-      <a href="#" class="work-link">Read More ↗</a>
+      <a href="#" class="work-link blog-read-more">Read More ↗</a>
     </div>
-    <div class="work-card animate d2">
+    <div class="work-card animate d2"
+      data-blog-title="The Trust Shift:"
+      data-blog-subtitle="Why credibility now follows proximity, not prestige."
+      data-blog-body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis molestie dictum ultricies, erat velit dapibus eros, et tincidunt dui libero ac lorem. Sed molestie augue sit amet leo consequat posuere. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Proin vel ante a orci tempus eleifend ut et magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam porttitor mauris, quis sollicitudin sapien justo in libero. Vestibulum mollis mauris enim. Morbi euismod magna ac lorem rutrum elementum. Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est. Vivamus fermentum semper porta. Nunc diam velit, adipiscing ut tristique vitae, sagittis vel odio. Maecenas convallis ullamcorper ultriciel salutis.">
       <div class="work-thumb">
         <img class="work-photo" src="./images/about.png" alt="">
       </div>
       <div class="work-meta"><span class="label">Category</span><span class="label">0002</span></div>
       <h3>The Trust Shift:</h3>
       <p>Why credibility now follows proximity, not prestige.</p>
-      <a href="#" class="work-link">Read More ↗</a>
+      <a href="#" class="work-link blog-read-more">Read More ↗</a>
     </div>
-    <div class="work-card animate">
+    <div class="work-card animate"
+      data-blog-title="The Measurement Trap:"
+      data-blog-subtitle="How quantification culture collided with PR."
+      data-blog-body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam erat volutpat. Nunc eleifend leo vitae magna. In id erat non orci commodo lobortis. Proin neque massa, cursus ut, gravida ut, lobortis eget, lacus. Sed diam. Praesent fermentum tempor tellus. Nullam tempus. Mauris ac felis vel velit tristique imperdiet. Donec at pede. Etiam vel neque nec dui dignissim bibendum. Vivamus id enim. Phasellus neque orci, porta a, aliquet quis, semper a, massa. Phasellus purus. Pellentesque tristique imperdiet tortor. Nam euismod tellus id erat. Nullam eu ante vel est convallis dignissim. Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum leo, quis tempor ligula erat quis odio. Nunc porta vulputate tellus. Nunc rutrum turpis sed pede. Sed bibendum. Aliquam posuere. Nunc aliquet, augue nec adipiscing interdum, lacus tellus malesuada massa, quis varius mi purus non odio. Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue ornare nulla, non luctus diam neque sit amet urna. Curabitur vulputate vestibulum lorem. Fusce sagittis, libero non molestie mollis, magna orci ultrices dolor, at vulputate neque nulla lacinia eros.">
       <div class="work-thumb">
         <img class="work-photo" src="./images/about.png" alt="">
       </div>
       <div class="work-meta"><span class="label">Category</span><span class="label">0000</span></div>
       <h3>The Measurement Trap:</h3>
       <p>How quantification culture collided with PR.</p>
-      <a href="#" class="work-link">Read More ↗</a>
+      <a href="#" class="work-link blog-read-more">Read More ↗</a>
     </div>
-    <div class="work-card animate d2">
+    <div class="work-card animate d2"
+      data-blog-title="The Business Model Crisis:"
+      data-blog-subtitle="Why the agency model is breaking."
+      data-blog-body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo posuere pede. Mauris ut est. Ut quis purus. Sed ac odio. Sed vehicula hendrerit sem. Duis non odio. Morbi ut dui. Sed accumsan risus eget odio. In hac habitasse platea dictumst. Pellentesque non elit. Fusce sed justo eu urna porta tincidunt. Mauris felis odio, sollicitudin sed, volutpat a, ornare ac, erat. Morbi quis dolor. Donec pellentesque, erat ac sagittis semper, nunc dui lobortis purus, quis congue purus metus ultricies tellus. Proin et quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi. Phasellus ultrices nulla quis nibh.">
       <div class="work-thumb">
         <img class="work-photo" src="./images/about.png" alt="">
       </div>
       <div class="work-meta"><span class="label">Category</span><span class="label">0000</span></div>
       <h3>The Business Model Crisis:</h3>
       <p>Why the agency model is breaking.</p>
-      <a href="#" class="work-link">Read More ↗</a>
+      <a href="#" class="work-link blog-read-more">Read More ↗</a>
     </div>
   </div>
 </section>
+
+<!-- Blog Overlay -->
+<div class="blog-overlay" id="blogOverlay" role="dialog" aria-modal="true" aria-label="Blog post">
+  <div class="blog-overlay-backdrop"></div>
+  <div class="blog-overlay-panel">
+    <button class="blog-overlay-close" id="blogOverlayClose" aria-label="Close">&times;</button>
+    <div class="blog-overlay-header">
+      <h2 class="blog-overlay-title" id="blogOverlayTitle"></h2>
+      <p class="blog-overlay-subtitle" id="blogOverlaySubtitle"></p>
+      <div class="blog-overlay-divider"></div>
+    </div>
+    <div class="blog-overlay-body-wrap">
+      <p class="blog-overlay-body" id="blogOverlayBody"></p>
+    </div>
+    <nav class="blog-overlay-pagination" id="blogOverlayPagination" aria-label="Page navigation">
+      <button class="blog-page-btn" id="blogPagePrev">← Prev</button>
+      <span class="blog-page-count" id="blogPageCount"></span>
+      <button class="blog-page-btn" id="blogPageNext">Next →</button>
+    </nav>
+  </div>
+</div>
 
 <section id="about">
   <div class="about-body">
@@ -772,6 +828,90 @@
     entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); observer.unobserve(entry.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+  // Blog overlay
+  const blogOverlay = document.getElementById('blogOverlay');
+  const blogOverlayClose = document.getElementById('blogOverlayClose');
+  const blogOverlayTitle = document.getElementById('blogOverlayTitle');
+  const blogOverlaySubtitle = document.getElementById('blogOverlaySubtitle');
+  const blogOverlayBody = document.getElementById('blogOverlayBody');
+  const blogOverlayPagination = document.getElementById('blogOverlayPagination');
+  const blogPagePrev = document.getElementById('blogPagePrev');
+  const blogPageNext = document.getElementById('blogPageNext');
+  const blogPageCount = document.getElementById('blogPageCount');
+
+  let blogPages = [], blogPageIndex = 0;
+
+  function computePages(text) {
+    const wrapEl = blogOverlayBody.parentElement;
+    const availHeight = wrapEl.clientHeight;
+    if (!availHeight) return [text];
+    const words = text.split(' ');
+    const pages = [];
+    let start = 0;
+    while (start < words.length) {
+      let lo = 1, hi = words.length - start, best = 1;
+      while (lo <= hi) {
+        const mid = Math.floor((lo + hi) / 2);
+        blogOverlayBody.textContent = words.slice(start, start + mid).join(' ');
+        if (blogOverlayBody.scrollHeight <= availHeight + 4) {
+          best = mid; lo = mid + 1;
+        } else {
+          hi = mid - 1;
+        }
+      }
+      pages.push(words.slice(start, start + best).join(' '));
+      start += best;
+      if (best === 0) break;
+    }
+    return pages.length ? pages : [text];
+  }
+
+  function showPage(index, animate) {
+    blogPageIndex = index;
+    if (animate) {
+      blogOverlayBody.classList.remove('page-turn');
+      void blogOverlayBody.offsetWidth;
+    }
+    blogOverlayBody.textContent = blogPages[index];
+    if (animate) blogOverlayBody.classList.add('page-turn');
+    blogPageCount.textContent = (index + 1) + ' / ' + blogPages.length;
+    blogPagePrev.disabled = index === 0;
+    blogPageNext.disabled = index === blogPages.length - 1;
+  }
+
+  function openBlogOverlay(card) {
+    blogOverlayTitle.textContent = card.dataset.blogTitle;
+    blogOverlaySubtitle.textContent = card.dataset.blogSubtitle;
+    blogOverlayBody.textContent = '';
+    blogOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      blogPages = computePages(card.dataset.blogBody);
+      blogOverlayPagination.hidden = blogPages.length <= 1;
+      showPage(0, false);
+      blogOverlayClose.focus();
+    }));
+  }
+
+  function closeBlogOverlay() {
+    blogOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  blogPagePrev.addEventListener('click', () => { if (blogPageIndex > 0) showPage(blogPageIndex - 1, true); });
+  blogPageNext.addEventListener('click', () => { if (blogPageIndex < blogPages.length - 1) showPage(blogPageIndex + 1, true); });
+
+  document.querySelectorAll('.blog-read-more').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      openBlogOverlay(link.closest('.work-card'));
+    });
+  });
+
+  blogOverlayClose.addEventListener('click', closeBlogOverlay);
+  blogOverlay.querySelector('.blog-overlay-backdrop').addEventListener('click', closeBlogOverlay);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBlogOverlay(); });
 
   const tooltipTab = document.getElementById('feat-tooltip-tab');
   const tooltip = document.getElementById('feat-tooltip');
